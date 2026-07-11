@@ -1,22 +1,43 @@
 extends SpringArm3D
  
 ## ---------------------------------------------------------
-## CAMERA MOUSE LOOK (for the SpringArm3D chase camera)
+## CAMERA MOUSE + CONTROLLER LOOK (for the SpringArm3D chase camera)
 ## Lets the player look left/right up to a max angle with the
-## mouse, independent of the skater's facing direction. The
-## look offset resets toward center when the mouse is idle... 
-## actually it does NOT auto-recenter here (see note below) —
-## it just clamps to the max angle, like glancing over your
-## shoulder while still steering normally with A/D.
+## mouse OR a gamepad right stick, independent of the skater's
+## facing direction.
+##
+## Behaviors:
+##  - Edge resistance: movement gets progressively less
+##    effective as you approach the max angle, so it feels
+##    like pushing against a soft limit instead of a hard wall.
+##  - Auto-recenter: after a short pause with no look input,
+##    the offset eases back to center on its own.
+##
 ## Attach directly to the SpringArm3D node (the one that's a
 ## child of the skater, with Camera3D as its child).
+##
+## Input Map setup needed for the controller:
+##   1. Project > Project Settings > Input Map
+##   2. Add action "look_left"  -> bind to "Right Stick Left"  (Joypad Axis 2 -, or use the
+##      "Manual Axis" picker and move the right stick left when prompted)
+##   3. Add action "look_right" -> bind to "Right Stick Right" (Joypad Axis 2 +)
+##   Godot's input popup detects stick direction automatically if you just move the
+##   stick in that direction while it's listening for input.
 ## ---------------------------------------------------------
  
-@export var look_sensitivity: float = 0.005      # mouse movement -> radians
-@export var max_look_angle_degrees: float = 30.0 # clamp range, left and right
+@export_category("Look Sensitivity")
+@export var mouse_sensitivity: float = 0.005        # mouse relative motion -> radians
+@export var controller_sensitivity: float = 3.0     # radians/sec at full stick deflection
+@export var max_look_angle_degrees: float = 30.0    # clamp range, left and right
+@export var edge_resistance_power: float = 2.0      # higher = resistance kicks in more sharply near the limit
  
-var look_yaw: float = 0.0       # current look offset, in radians
+@export_category("Auto Recenter")
+@export var recenter_delay: float = 1.0    # seconds of no look input before recentering starts
+@export var recenter_speed: float = 3.0    # higher = snaps back to center faster
+ 
+var look_yaw: float = 0.0        # current look offset, in radians
 var base_rotation_y: float = 0.0 # the SpringArm3D's original authored rotation (e.g. facing behind the skater)
+var idle_time: float = 0.0       # time since look input was last received
  
 func _ready() -> void:
 	base_rotation_y = rotation.y
@@ -25,16 +46,45 @@ func _ready() -> void:
  
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		look_yaw -= event.relative.x * look_sensitivity
-		var max_rad: float = deg_to_rad(max_look_angle_degrees)
-		look_yaw = clamp(look_yaw, -max_rad, max_rad)
+		_apply_look_delta(-event.relative.x * mouse_sensitivity)
  
 	# Optional: press Escape to release the mouse cursor (e.g. for menus/debugging).
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
  
  
-func _process(_delta: float) -> void:
-	# Apply the look offset on top of the SpringArm3D's base rotation, so it's always
-	# relative to "straight behind the skater," not relative to world space.
+func _process(delta: float) -> void:
+	# Controller right-stick look. get_axis returns 0 when no controller is connected
+	# or the stick is centered, so this is safe to leave running alongside mouse look.
+	var stick_input: float = Input.get_axis("look_left", "look_right")
+	if abs(stick_input) > 0.0:
+		_apply_look_delta(-stick_input * controller_sensitivity * delta)
+ 
+	idle_time += delta
+ 
+	# After a pause with no look input, ease the offset back to center.
+	if idle_time >= recenter_delay and look_yaw != 0.0:
+		var weight: float = 1.0 - exp(-recenter_speed * delta)
+		look_yaw = lerp(look_yaw, 0.0, weight)
+ 
 	rotation.y = base_rotation_y + look_yaw
+ 
+ 
+## Applies a raw yaw delta (from mouse or controller) with edge resistance and clamping,
+## and resets the auto-recenter idle timer. Shared by both input sources so they behave
+## identically near the limit.
+func _apply_look_delta(raw_delta: float) -> void:
+	idle_time = 0.0
+	var max_rad: float = deg_to_rad(max_look_angle_degrees)
+	var delta_yaw: float = raw_delta
+ 
+	# If this movement is pushing further toward the edge (same direction the camera
+	# is already looking), scale it down the closer we are to the limit. Movement back
+	# toward center is never resisted.
+	var moving_away_from_center: bool = look_yaw == 0.0 or sign(delta_yaw) == sign(look_yaw)
+	if moving_away_from_center:
+		var proximity: float = clamp(abs(look_yaw) / max_rad, 0.0, 1.0)
+		var resistance: float = pow(1.0 - proximity, edge_resistance_power)
+		delta_yaw *= resistance
+ 
+	look_yaw = clamp(look_yaw + delta_yaw, -max_rad, max_rad)
