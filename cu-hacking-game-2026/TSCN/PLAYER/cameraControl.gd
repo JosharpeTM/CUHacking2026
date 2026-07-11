@@ -38,25 +38,17 @@ extends SpringArm3D
 var look_yaw: float = 0.0        # current look offset, in radians
 var base_rotation_y: float = 0.0 # the SpringArm3D's original authored rotation (e.g. facing behind the skater)
 var idle_time: float = 0.0       # time since look input was last received
- 
+var _p: String = "p1_"           # input action prefix, taken from the parent skater's player_id
+
 func _ready() -> void:
 	base_rotation_y = rotation.y
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
- 
- 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		_apply_look_delta(-event.relative.x * mouse_sensitivity)
- 
-	# Optional: press Escape to release the mouse cursor (e.g. for menus/debugging).
-	if event.is_action_pressed("ui_cancel"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
- 
- 
+	_p = "p%d_" % get_parent().player_id
+
+
 func _process(delta: float) -> void:
 	# Controller right-stick look. get_axis returns 0 when no controller is connected
-	# or the stick is centered, so this is safe to leave running alongside mouse look.
-	var stick_input: float = Input.get_axis("look_left", "look_right")
+	# or the stick is centered, so this is safe to leave running.
+	var stick_input: float = Input.get_axis(_p + "look_left", _p + "look_right")
 	if abs(stick_input) > 0.0:
 		_apply_look_delta(-stick_input * controller_sensitivity * delta)
  

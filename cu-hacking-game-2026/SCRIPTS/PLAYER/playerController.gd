@@ -7,6 +7,11 @@ extends CharacterBody3D
 ## a visual mesh (skater model) as children.
 ## ---------------------------------------------------------
 
+# --- Player identity ---
+# 1 or 2: selects which input actions drive this skater (p1_* / p2_*)
+# and which controller (device 0 / device 1) it listens to.
+@export_range(1, 2) var player_id: int = 1
+
 # --- Movement tuning ---
 @export_category("Speed")
 @export var max_speed: float = 12.0          # top speed (m/s)
@@ -26,6 +31,12 @@ extends CharacterBody3D
 # --- Internal state ---
 var current_speed: float = 0.0     # signed forward speed (+forward / -backward)
 var current_turn_rate: float = 0.0 # smoothed turning speed (radians/sec), eases toward target
+var _p: String = "p1_"             # input action prefix, built from player_id
+
+func _ready() -> void:
+	_p = "p%d_" % player_id
+	add_to_group("Player")
+
 
 func _physics_process(delta: float) -> void:
 	handle_turning(delta)
@@ -36,7 +47,7 @@ func _physics_process(delta: float) -> void:
 
 
 func handle_turning(delta: float) -> void:
-	var turn_input := Input.get_axis("turn_left", "turn_right")
+	var turn_input := Input.get_axis(_p + "turn_left", _p + "turn_right")
 
 	# Turning is more responsive at speed, but still possible while nearly stopped.
 	var speed_factor: float = clamp(abs(current_speed) / max_speed, 0.0, 1.0)
@@ -57,8 +68,8 @@ func handle_turning(delta: float) -> void:
 
 
 func handle_acceleration(delta: float) -> void:
-	var accelerate: bool = Input.is_action_pressed("accelerate")
-	var brake: bool = Input.is_action_pressed("brake")
+	var accelerate: bool = Input.is_action_pressed(_p + "accelerate")
+	var brake: bool = Input.is_action_pressed(_p + "brake")
 
 	if accelerate and not brake:
 		current_speed += acceleration_speed * delta
@@ -81,7 +92,7 @@ func handle_acceleration(delta: float) -> void:
 
 
 func handle_jump(_delta: float) -> void:
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if is_on_floor() and Input.is_action_just_pressed(_p + "jump"):
 		velocity.y = jump_velocity
 
 

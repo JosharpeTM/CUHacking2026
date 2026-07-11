@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cn6s7ncp3gbo"]
+[gd_scene load_steps=5 format=3 uid="uid://cn6s7ncp3gbo"]
 
 [ext_resource type="Script" uid="uid://d1jy6hbmb2kjd" path="res://SCRIPTS/PLAYER/playerController.gd" id="1_k5di7"]
 [ext_resource type="Script" uid="uid://cgfy2h0tewj61" path="res://TSCN/PLAYER/cameraControl.gd" id="2_ul7ul"]
@@ -8,21 +8,19 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 height = 1.8881836
 
-[node name="PlayerController" type="Node3D" unique_id=1270526261]
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=855619314]
+[node name="PlayerController" type="CharacterBody3D" unique_id=855619314]
 script = ExtResource("1_k5di7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=155561268]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=155561268]
 shape = SubResource("SphereShape3D_g4v7s")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=448337031]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=448337031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4504466, 0)
 mesh = SubResource("CapsuleMesh_g4v7s")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CharacterBody3D" unique_id=850524718]
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=850524718]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 spring_length = 5.0
 script = ExtResource("2_ul7ul")
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/SpringArm3D" unique_id=2093961590]
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=2093961590]

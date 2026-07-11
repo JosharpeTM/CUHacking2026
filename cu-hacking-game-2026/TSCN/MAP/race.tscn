@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://du3uvmdgpr84d"]
+
+[ext_resource type="Script" uid="uid://bl62prepvj75i" path="res://SCRIPTS/MAP/race.gd" id="1_racescr"]
+[ext_resource type="PackedScene" uid="uid://bs4mdhfa75c8x" path="res://TSCN/MAP/testmap.tscn" id="2_track"]
+[ext_resource type="PackedScene" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
+
+[node name="Race" type="Node" unique_id=1905461087]
+script = ExtResource("1_racescr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=973674735]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="SVC1" type="SubViewportContainer" parent="HBoxContainer" unique_id=1991323203]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SV1" type="SubViewport" parent="HBoxContainer/SVC1" unique_id=1593845593]
+handle_input_locally = false
+size = Vector2i(576, 648)
+render_target_update_mode = 4
+
+[node name="Track" parent="HBoxContainer/SVC1/SV1" unique_id=610729634 instance=ExtResource("2_track")]
+
+[node name="HUD1" parent="HBoxContainer/SVC1/SV1" unique_id=1101167098 instance=ExtResource("3_hud")]
+
+[node name="SVC2" type="SubViewportContainer" parent="HBoxContainer" unique_id=1614208375]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SV2" type="SubViewport" parent="HBoxContainer/SVC2" unique_id=717066456]
+handle_input_locally = false
+size = Vector2i(576, 648)
+render_target_update_mode = 4
+
+[node name="P2Camera" type="Camera3D" parent="HBoxContainer/SVC2/SV2" unique_id=574043035]
+
+[node name="HUD2" parent="HBoxContainer/SVC2/SV2" unique_id=81812753 instance=ExtResource("3_hud")]
+player_id = 2
+
+[node name="SharedHUD" type="Control" parent="." unique_id=1424406533]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TimerLabel" type="Label" parent="SharedHUD" unique_id=379552463]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_right = 160.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "00:00.000"
+horizontal_alignment = 1
+vertical_alignment = 1
