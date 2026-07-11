@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dgjd43pucuc52"]
+
+[ext_resource type="PackedScene" uid="uid://bosup20nwuuis" path="res://MODELS/neonCity.glb" id="1_nihq8"]
+
+[node name="neonCity" unique_id=1976190268 instance=ExtResource("1_nihq8")]

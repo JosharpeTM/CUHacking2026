@@ -28,6 +28,7 @@ window/stretch/aspect="expand"
 
 folder_colors={
 "res://MATERIALS/": "green",
+"res://MODELS/": "pink",
 "res://SCRIPTS/": "red",
 "res://TSCN/": "purple"
 }
