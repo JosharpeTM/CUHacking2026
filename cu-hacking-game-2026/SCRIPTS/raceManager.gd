@@ -9,8 +9,13 @@ extends Node
 
 signal split_recorded(player_id: int, checkpoint_index: int, split_time: float)
 signal player_finished(player_id: int, final_time: float)
+# Emitted each second of the pre-race countdown. value counts 3 -> 2 -> 1,
+# then 0 to signal "GO!". The HUD listens to animate the 3-2-1-GO overlay.
+signal countdown_tick(value: int)
 
 const TOTAL_CHECKPOINTS := 3
+# How many seconds the "3 2 1 GO" countdown runs before the racers are freed.
+const COUNTDOWN_SECONDS := 3
 const MENU_SCENE := "res://TSCN/UI/main_menu.tscn"
 const RACE_SCENE := "res://TSCN/MAP/race.tscn"
 const TIME_TRIAL_SCENE := "res://TSCN/MAP/time_trial.tscn"
@@ -20,6 +25,7 @@ const RESULTS_SCENE := "res://TSCN/UI/results.tscn"
 const SCORE_PATH := "user://scores.cfg"
 
 var race_active := false
+var input_locked := false  # true during the countdown: skaters can't move yet
 var race_elapsed := 0.0  # shared race clock, runs until every racer finishes
 var players := {}  # player_id -> {elapsed, splits: Array, next_cp, finished, final_time}
 
@@ -27,6 +33,27 @@ var players := {}  # player_id -> {elapsed, splits: Array, next_cp, finished, fi
 var is_time_trial := false
 var previous_best := 0.0   # best time BEFORE this run (0.0 == no record yet)
 var is_new_record := false # did the run just set a new best?
+
+
+func _ready() -> void:
+	# The game is controller-only, and Godot only delivers joypad input to the
+	# window that currently holds OS input focus. On launch (and in fullscreen)
+	# the window can come up unfocused, so the controller appears dead until you
+	# click the window. Grab focus up front — and again whenever we regain it —
+	# so controllers work without needing a mouse click.
+	_grab_window_focus.call_deferred()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		_grab_window_focus()
+
+
+func _grab_window_focus() -> void:
+	DisplayServer.window_move_to_foreground()
+	var win := get_window()
+	if win:
+		win.grab_focus()
 
 
 ## Reset all race state and start the clocks. Called by the race scene
@@ -47,6 +74,25 @@ func start_race(time_trial := false) -> void:
 			"final_time": 0.0,
 		}
 	race_elapsed = 0.0
+	# Hold the racers at the line and keep the clock frozen until the
+	# "3 2 1 GO" countdown finishes.
+	race_active = false
+	input_locked = true
+	_run_countdown()
+
+
+## Run the pre-race countdown, then free the racers. Emits countdown_tick
+## once a second (3, 2, 1) and finally 0 for "GO!", at which point the clock
+## starts and input unlocks.
+func _run_countdown() -> void:
+	for n in range(COUNTDOWN_SECONDS, 0, -1):
+		countdown_tick.emit(n)
+		await get_tree().create_timer(1.0).timeout
+		# Bail out if the race was torn down mid-countdown (scene change).
+		if not input_locked:
+			return
+	countdown_tick.emit(0)  # GO!
+	input_locked = false
 	race_active = true
 
 

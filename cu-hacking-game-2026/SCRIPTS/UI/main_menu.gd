@@ -65,7 +65,7 @@ func _refresh_controller_state() -> void:
 	elif not has_pad:
 		quit_button.grab_focus()
 
-
+ 
 func _on_race() -> void:
 	get_tree().change_scene_to_file(RaceManager.RACE_SCENE)
 

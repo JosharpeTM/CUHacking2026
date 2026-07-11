@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://du3uvmdgpr84d"]
+[gd_scene load_steps=6 format=3 uid="uid://du3uvmdgpr84d"]
 
 [ext_resource type="Script" uid="uid://bl62prepvj75i" path="res://SCRIPTS/MAP/race.gd" id="1_racescr"]
 [ext_resource type="PackedScene" uid="uid://bs4mdhfa75c8x" path="res://TSCN/MAP/testmap.tscn" id="2_track"]
 [ext_resource type="PackedScene" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
+[ext_resource type="Script" path="res://SCRIPTS/UI/countdown_overlay.gd" id="4_countdown"]
 
 [sub_resource type="StyleBoxFlat" id="divider_glow"]
 bg_color = Color(0.85, 0.5, 1, 1)
@@ -82,3 +83,26 @@ theme_override_font_sizes/font_size = 48
 text = "00:00.000"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CountdownLabel" type="Label" parent="SharedHUD" unique_id=1424406901]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.0, 0.16, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 180
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_countdown")

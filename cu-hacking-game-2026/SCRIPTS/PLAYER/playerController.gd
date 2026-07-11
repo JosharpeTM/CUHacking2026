@@ -28,10 +28,30 @@ extends CharacterBody3D
 @export var jump_velocity: float = 11.0
 @export var gravity: float = 20.0
 
+@export_category("Boost")
+# Rocket-League-style boost: a fuel tank (0..BOOST_MAX) you spend by HOLDING
+# R1. It doesn't regenerate on its own — you top it up by driving over boost
+# pads scattered around the track.
+@export var boost_speed_bonus: float = 8.0   # extra top speed while boosting
+@export var boost_accel: float = 16.0        # forward thrust applied while boosting
+@export var boost_drain_rate: float = 33.0   # tank units spent per second of boost
+
+const BOOST_MAX: float = 100.0
+const BOOST_START: float = 50.0  # racers launch with a half tank
+const DRIVE_TRAIL_MIN_SPEED: float = 1.0  # min speed before the drive trails kick in
+
 # --- Internal state ---
 var current_speed: float = 0.0     # signed forward speed (+forward / -backward)
 var current_turn_rate: float = 0.0 # smoothed turning speed (radians/sec), eases toward target
+var boost_amount: float = BOOST_START  # remaining boost fuel; read by the HUD
+var _boosting: bool = false        # is boost being spent this frame?
 var _p: String = "p1_"             # input action prefix, built from player_id
+
+# Trail particle nodes — they live in the scene so they can be repositioned in
+# the editor. Boost trails fire while boosting; drive trails fire while rolling
+# normally. Two of each, one per side of the board.
+@onready var _boost_trails: Array[GPUParticles3D] = [$BoostTrail, $BoostTrail2]
+@onready var _drive_trails: Array[GPUParticles3D] = [$DriveTrail, $DriveTrail2]
 
 func _ready() -> void:
 	_p = "p%d_" % player_id
@@ -39,11 +59,66 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# During the "3 2 1 GO" countdown the skater is pinned at the start line:
+	# ignore all input, kill any drift, but still settle onto the ground.
+	if RaceManager.input_locked:
+		current_speed = 0.0
+		current_turn_rate = 0.0
+		velocity.x = 0.0
+		velocity.z = 0.0
+		if not is_on_floor():
+			velocity.y -= gravity * delta
+		else:
+			velocity.y = 0.0
+		move_and_slide()
+		return
+
 	handle_turning(delta)
+	handle_boost(delta)
 	handle_acceleration(delta)
 	handle_jump(delta)
 	apply_movement(delta)
 	move_and_slide()
+	_update_trails()
+
+
+## R1 boost: hold R1 to spend boost fuel for extra thrust and a raised top
+## speed. Drains the tank while held; does nothing once it's empty. The actual
+## speed effect is applied in handle_acceleration via the _boosting flag.
+func handle_boost(delta: float) -> void:
+	_boosting = Input.is_action_pressed(_p + "boost") and boost_amount > 0.0
+	if _boosting:
+		boost_amount = maxf(boost_amount - boost_drain_rate * delta, 0.0)
+
+
+## Drive the trail particles: boost streaks while boosting, and the softer
+## drive streaks while rolling along the ground (but not while boosting, so the
+## boost trail cleanly takes over). Called after move_and_slide so is_on_floor
+## and current_speed are up to date.
+func _update_trails() -> void:
+	var driving: bool = is_on_floor() and absf(current_speed) > DRIVE_TRAIL_MIN_SPEED
+	_set_emitting(_boost_trails, _boosting)
+	_set_emitting(_drive_trails, driving and not _boosting)
+
+
+func _set_emitting(trails: Array, on: bool) -> void:
+	for t in trails:
+		if t:
+			t.emitting = on
+
+
+## Whether the skater is actively spending boost this frame (read by the HUD
+## gauge so it can glow while boosting).
+func is_boosting() -> bool:
+	return _boosting
+
+
+## Refill the boost tank (called by boost pads). Returns how much was actually
+## added, so a pad can leave itself untouched when the racer is already full.
+func add_boost(amount: float) -> float:
+	var before: float = boost_amount
+	boost_amount = clampf(boost_amount + amount, 0.0, BOOST_MAX)
+	return boost_amount - before
 
 
 func handle_turning(delta: float) -> void:
@@ -88,7 +163,13 @@ func handle_acceleration(delta: float) -> void:
 		elif current_speed < 0.0:
 			current_speed = min(current_speed + friction * delta, 0.0)
 
-	current_speed = clamp(current_speed, -max_speed * 0.5, max_speed)  # reverse capped slower
+	# While boosting, add thrust and lift the top-speed cap so the surge sticks.
+	var top_speed: float = max_speed
+	if _boosting:
+		current_speed += boost_accel * delta
+		top_speed = max_speed + boost_speed_bonus
+
+	current_speed = clamp(current_speed, -max_speed * 0.5, top_speed)  # reverse capped slower
 
 
 func handle_jump(_delta: float) -> void:

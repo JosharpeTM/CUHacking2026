@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bs4mdhfa75c8x"]
+[gd_scene load_steps=11 format=3 uid="uid://bs4mdhfa75c8x"]
 
 [ext_resource type="PackedScene" uid="uid://cn6s7ncp3gbo" path="res://TSCN/PLAYER/playerController.tscn" id="1_mwf44"]
 [ext_resource type="Material" uid="uid://cj3bxhcmpbgt6" path="res://MATERIALS/texture_01_blue.tres" id="2_rci68"]
 [ext_resource type="PackedScene" uid="uid://u6mpcoolgi1s" path="res://TSCN/OBJECTS/checkpoint.tscn" id="3_chkpt"]
 [ext_resource type="PackedScene" uid="uid://cbtd1o4r3j1lb" path="res://TSCN/OBJECTS/finnish_line.tscn" id="4_fnish"]
+[ext_resource type="PackedScene" uid="uid://cb0ostpad0001" path="res://TSCN/OBJECTS/boost_pad.tscn" id="5_boost"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwf44"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -55,6 +56,22 @@ checkpoint_index = 2
 
 [node name="FinnishLine" parent="." instance=ExtResource("4_fnish")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.5, 12)
+
+[node name="BoostPad0" parent="." instance=ExtResource("5_boost")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 4)
+
+[node name="BoostPad1" parent="." instance=ExtResource("5_boost")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -4)
+
+[node name="BoostPad2" parent="." instance=ExtResource("5_boost")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, -10)
+boost_value = 100.0
+
+[node name="BoostPad3" parent="." instance=ExtResource("5_boost")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.3, 0)
+
+[node name="BoostPad4" parent="." instance=ExtResource("5_boost")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 8)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=591019673]
 mesh = SubResource("PlaneMesh_g4v7s")
