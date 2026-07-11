@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://du3uvmdgpr84d"]
+[gd_scene format=3 uid="uid://du3uvmdgpr84d"]
 
 [ext_resource type="Script" uid="uid://bl62prepvj75i" path="res://SCRIPTS/MAP/race.gd" id="1_racescr"]
 [ext_resource type="PackedScene" uid="uid://bs4mdhfa75c8x" path="res://TSCN/MAP/testmap.tscn" id="2_track"]
 [ext_resource type="PackedScene" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
-[ext_resource type="Script" path="res://SCRIPTS/UI/countdown_overlay.gd" id="4_countdown"]
+[ext_resource type="Script" uid="uid://d2ca1d6ijhcmf" path="res://SCRIPTS/UI/countdown_overlay.gd" id="4_countdown"]
+[ext_resource type="AudioStream" uid="uid://0kp6msvy0u6d" path="res://Sound effects/freesound_community-arcade-countdown-7007.mp3" id="5_1uu5b"]
 
 [sub_resource type="StyleBoxFlat" id="divider_glow"]
 bg_color = Color(0.85, 0.5, 1, 1)
@@ -31,14 +32,15 @@ stretch = true
 
 [node name="SV1" type="SubViewport" parent="HBoxContainer/SVC1" unique_id=1593845593]
 handle_input_locally = false
-size = Vector2i(576, 648)
+size = Vector2i(572, 648)
 render_target_update_mode = 4
 
 [node name="Track" parent="HBoxContainer/SVC1/SV1" unique_id=610729634 instance=ExtResource("2_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042695522, -9.536743e-07, -0.023324966)
 
 [node name="HUD1" parent="HBoxContainer/SVC1/SV1" unique_id=1101167098 instance=ExtResource("3_hud")]
 
-[node name="Divider" type="Panel" parent="HBoxContainer"]
+[node name="Divider" type="Panel" parent="HBoxContainer" unique_id=1909722990]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("divider_glow")
@@ -50,7 +52,7 @@ stretch = true
 
 [node name="SV2" type="SubViewport" parent="HBoxContainer/SVC2" unique_id=717066456]
 handle_input_locally = false
-size = Vector2i(576, 648)
+size = Vector2i(572, 648)
 render_target_update_mode = 4
 
 [node name="P2Camera" type="Camera3D" parent="HBoxContainer/SVC2/SV2" unique_id=574043035]
@@ -97,12 +99,14 @@ offset_right = 200.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.08, 0.0, 0.16, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0, 0.16, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 180
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_countdown")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="SharedHUD" unique_id=389934801]
+stream = ExtResource("5_1uu5b")
