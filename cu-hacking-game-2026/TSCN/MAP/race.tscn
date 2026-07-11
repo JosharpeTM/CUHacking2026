@@ -34,7 +34,7 @@ handle_input_locally = false
 size = Vector2i(572, 648)
 render_target_update_mode = 4
 
-[node name="Level 1" parent="HBoxContainer/SVC1/SV1" unique_id=1519338197 instance=ExtResource("2_6s6dp")]
+[node name="Track" parent="HBoxContainer/SVC1/SV1" unique_id=1519338197 instance=ExtResource("2_6s6dp")]
 
 [node name="HUD1" parent="HBoxContainer/SVC1/SV1" unique_id=1101167098 instance=ExtResource("3_hud")]
 
