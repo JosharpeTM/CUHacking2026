@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cb0ostpad0001"]
 
 [ext_resource type="Script" uid="uid://kw7lppf6n35r" path="res://SCRIPTS/OBJECTS/boost_pad.gd" id="2_padscr"]
-[ext_resource type="AudioStream" uid="uid://cwy1dpw6ni0uq" path="res://AUDIO/checkpoint.wav" id="3_padsfx"]
+[ext_resource type="AudioStream" uid="uid://bcrn35dyy3kn" path="res://Sound effects/clickSound.mp3" id="3_e20f3"]
 [ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="3_rugfs"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_disc"]
@@ -69,4 +69,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_hit")
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=199272280]
-stream = ExtResource("3_padsfx")
+stream = ExtResource("3_e20f3")
+volume_db = 15.743
