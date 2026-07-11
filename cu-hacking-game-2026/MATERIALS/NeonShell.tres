@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://mv37fpdjga54"]
+
+[ext_resource type="Shader" uid="uid://ccvjphn83bq2o" path="res://SCRIPTS/SHADERS/neon_shell.gdshader" id="1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1")
+shader_parameter/wire_color = Color(0.698, 0.545, 0.996, 1)
+shader_parameter/rim_color = Color(0.741, 0, 0.741, 1)
+shader_parameter/fill_color = Color(0.04, 0, 0.08, 1)
+shader_parameter/emission_energy = 5.0
+shader_parameter/wire_density = 24.0
+shader_parameter/wire_thickness = 1.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_strength = 1.6
+shader_parameter/scan_speed = 1.5
+shader_parameter/scan_width = 0.06
+shader_parameter/scan_strength = 1.2
+shader_parameter/fill_alpha = 0.12

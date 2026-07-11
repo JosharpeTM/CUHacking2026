@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://u6mpcoolgi1s"]
+[gd_scene format=3 uid="uid://u6mpcoolgi1s"]
 
-[ext_resource type="Material" uid="uid://di2houa2ewsgy" path="res://MATERIALS/PurpleTransparnet.tres" id="1_e1wb2"]
 [ext_resource type="Material" uid="uid://81y6yfpxkh3e" path="res://MATERIALS/PurpleNeon.tres" id="2_oji17"]
-[ext_resource type="Script" path="res://SCRIPTS/OBJECTS/checkpoint.gd" id="3_cpscr"]
-[ext_resource type="AudioStream" path="res://AUDIO/checkpoint.wav" id="4_cpsfx"]
+[ext_resource type="Script" uid="uid://jik8qe8q51n4" path="res://SCRIPTS/OBJECTS/checkpoint.gd" id="3_cpscr"]
+[ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="3_ufv7i"]
+[ext_resource type="AudioStream" uid="uid://cwy1dpw6ni0uq" path="res://AUDIO/checkpoint.wav" id="4_cpsfx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hitbox"]
 size = Vector3(6.2, 3, 1.5)
@@ -21,6 +21,7 @@ data = PackedVector3Array(-0.1086, 0.5, 0.1157, 0.1086, 0.5, 0.1157, -0.1086, -0
 data = PackedVector3Array(-0.1086, 0.5, 0.1157, 0.1086, 0.5, 0.1157, -0.1086, -0.5, 0.1157, 0.1086, 0.5, 0.1157, 0.1086, -0.5, 0.1157, -0.1086, -0.5, 0.1157, 0.1086, 0.5, -0.1157, -0.1086, 0.5, -0.1157, 0.1086, -0.5, -0.1157, -0.1086, 0.5, -0.1157, -0.1086, -0.5, -0.1157, 0.1086, -0.5, -0.1157, 0.1086, 0.5, 0.1157, 0.1086, 0.5, -0.1157, 0.1086, -0.5, 0.1157, 0.1086, 0.5, -0.1157, 0.1086, -0.5, -0.1157, 0.1086, -0.5, 0.1157, -0.1086, 0.5, -0.1157, -0.1086, 0.5, 0.1157, -0.1086, -0.5, -0.1157, -0.1086, 0.5, 0.1157, -0.1086, -0.5, 0.1157, -0.1086, -0.5, -0.1157, 0.1086, 0.5, 0.1157, -0.1086, 0.5, 0.1157, 0.1086, 0.5, -0.1157, -0.1086, 0.5, 0.1157, -0.1086, 0.5, -0.1157, 0.1086, 0.5, -0.1157, -0.1086, -0.5, 0.1157, 0.1086, -0.5, 0.1157, -0.1086, -0.5, -0.1157, 0.1086, -0.5, 0.1157, 0.1086, -0.5, -0.1157, -0.1086, -0.5, -0.1157)
 
 [node name="Checkpoint" type="Node3D" unique_id=1502376633]
+transform = Transform3D(1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("3_cpscr")
 
 [node name="HitBox" type="Area3D" parent="." unique_id=233838163 groups=["Checkpoint"]]
@@ -34,7 +35,7 @@ stream = ExtResource("4_cpsfx")
 
 [node name="Transparent" type="MeshInstance3D" parent="." unique_id=1993598288]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02557373, 0, -0.44604492)
-material_override = ExtResource("1_e1wb2")
+material_override = ExtResource("3_ufv7i")
 mesh = SubResource("BoxMesh_g4v7s")
 
 [node name="Pole1" type="MeshInstance3D" parent="." unique_id=1980191104]
