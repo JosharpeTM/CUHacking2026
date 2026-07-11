@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://blnwstyisbrmn"]
+
+[ext_resource type="PackedScene" uid="uid://dgjd43pucuc52" path="res://TSCN/MAP/neon_city.tscn" id="1_oym7m"]
+[ext_resource type="PackedScene" uid="uid://bb14apk6pbkte" path="res://TSCN/MAP/Skybox.tscn" id="2_diyha"]
+[ext_resource type="PackedScene" uid="uid://cn6s7ncp3gbo" path="res://TSCN/PLAYER/playerController.tscn" id="3_a4ihj"]
+[ext_resource type="AudioStream" uid="uid://0kp6msvy0u6d" path="res://Sound effects/freesound_community-arcade-countdown-7007.mp3" id="4_exygr"]
+[ext_resource type="PackedScene" uid="uid://u6mpcoolgi1s" path="res://TSCN/OBJECTS/checkpoint.tscn" id="5_8juyp"]
+[ext_resource type="PackedScene" uid="uid://cbtd1o4r3j1lb" path="res://TSCN/OBJECTS/finnish_line.tscn" id="6_a4ihj"]
+[ext_resource type="PackedScene" uid="uid://cb0ostpad0001" path="res://TSCN/OBJECTS/boost_pad.tscn" id="7_exygr"]
+
+[node name="Level 1" type="Node3D" unique_id=1519338197]
+
+[node name="neonCity" parent="." unique_id=1976190268 instance=ExtResource("1_oym7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.62895, -0.021974564, 106.377174)
+
+[node name="Skybox" parent="." unique_id=788530130 instance=ExtResource("2_diyha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3798733, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1739445436]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player1" parent="." unique_id=855619314 instance=ExtResource("3_a4ihj")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.633482, 1.9826598, -10.758427)
+turn_speed = 1.4
+min_turn_speed = 0.9
+drift_turn_multiplier = 2.0
+drift_boost_duration = 1.2
+
+[node name="Player2" parent="." unique_id=598120428 instance=ExtResource("3_a4ihj")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -8.69632, 1.9826598, -10.758427)
+player_id = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1362003363]
+stream = ExtResource("4_exygr")
+autoplay = true
+
+[node name="Checkpoints" type="Node" parent="." unique_id=1960739723]
+
+[node name="Checkpoint0" parent="Checkpoints" unique_id=1502376633 instance=ExtResource("5_8juyp")]
+transform = Transform3D(1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, -7.1301, 1.4363871, 14.187611)
+
+[node name="Checkpoint1" parent="Checkpoints" unique_id=1411533244 instance=ExtResource("5_8juyp")]
+transform = Transform3D(1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, -7.1301, 5.789075, 82.03493)
+checkpoint_index = 1
+
+[node name="Checkpoint2" parent="Checkpoints" unique_id=97909891 instance=ExtResource("5_8juyp")]
+transform = Transform3D(-6.457097e-08, -2.2771209e-08, 1.5, -0.26047227, 2.9544232, 0, -1.4772116, -0.52094454, -6.556708e-08, -28.612524, 9.947251, 105.89881)
+checkpoint_index = 2
+
+[node name="Checkpoint3" parent="Checkpoints" unique_id=1846544099 instance=ExtResource("5_8juyp")]
+transform = Transform3D(-0.8869477, -0.3127856, 1.199527, -0.26047227, 2.9544232, 0, -1.1813035, -0.41659135, -0.90063024, -61.24192, 14.703553, 132.06906)
+checkpoint_index = 3
+
+[node name="Checkpoint4" parent="Checkpoints" unique_id=686175200 instance=ExtResource("5_8juyp")]
+transform = Transform3D(1.5, 1.3914015e-08, 5.9604645e-08, 1.4901161e-08, 2.9999998, -1.4901161e-08, 1.1920929e-07, 4.17316e-08, 1.5, -91.183464, 18.966862, 162.93593)
+checkpoint_index = 4
+
+[node name="Checkpoint5" parent="Checkpoints" unique_id=1346309038 instance=ExtResource("5_8juyp")]
+transform = Transform3D(1.5, 1.3914015e-08, 5.9604645e-08, 1.4901161e-08, 2.9999998, -1.4901161e-08, 1.1920929e-07, 4.17316e-08, 1.5, -91.183464, 18.966862, 208.62073)
+checkpoint_index = 5
+
+[node name="Checkpoint6" parent="Checkpoints" unique_id=1692767776 instance=ExtResource("5_8juyp")]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 2.9999998, 0, 1.5, 0, -6.556708e-08, -55.45893, 18.966862, 233.72314)
+checkpoint_index = 6
+
+[node name="Checkpoint7" parent="Checkpoints" unique_id=1729667872 instance=ExtResource("5_8juyp")]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 2.9999998, 0, 1.5, 0, -6.556708e-08, 5.725914, 18.966862, 233.72314)
+checkpoint_index = 7
+
+[node name="Checkpoint8" parent="Checkpoints" unique_id=1720343695 instance=ExtResource("5_8juyp")]
+transform = Transform3D(1.5, 0, 0, 0, 2.9999998, 0, 0, 0, 1.5, 39.469013, 18.966862, 204.6748)
+checkpoint_index = 8
+
+[node name="Checkpoint9" parent="Checkpoints" unique_id=1505188729 instance=ExtResource("5_8juyp")]
+transform = Transform3D(1.5, 0, 0, 0, 2.9999998, 0, 0, 0, 1.5, 25.602581, 18.966862, 166.44698)
+checkpoint_index = 9
+
+[node name="Checkpoint10" parent="Checkpoints" unique_id=445123716 instance=ExtResource("5_8juyp")]
+transform = Transform3D(1.2639843, -0.19895543, -0.80152845, 0.11768865, 2.9907517, 0, 0.7990576, -0.1257744, 1.2678928, 32.233685, 16.544666, 142.65019)
+checkpoint_index = 10
+
+[node name="FinnishLine" parent="Checkpoints/Checkpoint10" unique_id=615543261 instance=ExtResource("6_a4ihj")]
+transform = Transform3D(1.0000008, 1.1175871e-08, 5.9604645e-08, -1.6763806e-08, 0.9999999, 3.7252903e-09, 5.9604645e-08, -2.2351742e-08, 1.0000002, 9.190109, -2.6586177, -34.500893)
+
+[node name="Boosts" type="Node" parent="." unique_id=1247766947]
+
+[node name="BoostPad0" parent="Boosts" unique_id=1645289874 instance=ExtResource("7_exygr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.964762, 0.3, 4)
+
+[node name="BoostPad1" parent="Boosts" unique_id=114463631 instance=ExtResource("7_exygr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.958326, 0.3, 4)
+
+[node name="BoostPad2" parent="Boosts" unique_id=1712297004 instance=ExtResource("7_exygr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.640749, 0.3, 55.01784)
+
+[node name="BoostPad3" parent="Boosts" unique_id=1971439288 instance=ExtResource("7_exygr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0028019, 0.3, 55.01784)
+
+[node name="BoostPad4" parent="Boosts" unique_id=1263089247 instance=ExtResource("7_exygr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.049946, 9.0818615, 106.87245)
