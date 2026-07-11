@@ -260,7 +260,11 @@ func handle_boost(delta: float) -> void:
 	_boosting = Input.is_action_pressed(_p + "boost") and boost_amount > 0.0
 	if _boosting:
 		boost_amount = maxf(boost_amount - boost_drain_rate * delta, 0.0)
-
+		if !$AudioStreamPlayer2.playing:
+			$AudioStreamPlayer2.play()
+		else:
+			if $AudioStreamPlayer2.playing:
+				$AudioStreamPlayer2.stop()
 
 ## Drive the trail particles: boost streaks while boosting, and the softer
 ## drive streaks while rolling along the ground (but not while boosting, so the

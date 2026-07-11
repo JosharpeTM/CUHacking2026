@@ -132,3 +132,5 @@ stream = ExtResource("4_nfgo0")
 volume_db = -10.535
 pitch_scale = 0.73
 parameters/looping = false
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1396643119]
