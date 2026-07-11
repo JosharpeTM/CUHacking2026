@@ -22,8 +22,16 @@ window/stretch/aspect="expand"
 [file_customization]
 
 folder_colors={
+"res://MATERIALS/": "green",
 "res://SCRIPTS/": "red",
 "res://TSCN/": "purple"
+}
+
+[input]
+
+Jump={
+"deadzone": 0.2,
+"events": []
 }
 
 [physics]
