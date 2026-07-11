@@ -20,9 +20,9 @@ extends CharacterBody3D
 @export var friction: float = 2.0            # natural deceleration when idle (rolling resistance)
 
 @export_category("Turning")
-@export var turn_speed: float = 2.5          # radians/sec at full speed
+@export var turn_speed: float = 0.7        # radians/sec at full speed
 @export var min_turn_speed: float = 0.4      # radians/sec when standing still (lets you pivot a bit)
-@export var turn_smoothing: float = 4.0      # how quickly turning eases in/out — LOWER = floatier, HIGHER = snappier
+@export var turn_smoothing: float = 8.0      # how quickly turning eases in/out — LOWER = floatier, HIGHER = snappier
 
 @export_category("Jumping")
 @export var jump_velocity: float = 11.0
