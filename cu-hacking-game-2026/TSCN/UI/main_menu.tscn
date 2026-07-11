@@ -1,17 +1,10 @@
 [gd_scene format=3 uid="uid://b82jtorg2mjh5"]
 
 [ext_resource type="Script" uid="uid://pbb45ucwo268" path="res://SCRIPTS/UI/main_menu.gd" id="1_menuscr"]
-
-[sub_resource type="Gradient" id="bg_grad"]
-offsets = PackedFloat32Array(0, 0.55, 1)
-colors = PackedColorArray(0.07, 0.02, 0.14, 1, 0.03, 0.01, 0.07, 1, 0.005, 0, 0.02, 1)
-
-[sub_resource type="GradientTexture2D" id="bg_tex"]
-gradient = SubResource("bg_grad")
-width = 8
-height = 256
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 1)
+[ext_resource type="PackedScene" uid="uid://bb14apk6pbkte" path="res://TSCN/MAP/Skybox.tscn" id="2_ro3ta"]
+[ext_resource type="PackedScene" uid="uid://cb0ostpad0001" path="res://TSCN/OBJECTS/boost_pad.tscn" id="3_ro4st"]
+[ext_resource type="PackedScene" uid="uid://8j7vx2o6kc3v" path="res://TSCN/PLAYER/dxracer_goyim.tscn" id="4_g1av8"]
+[ext_resource type="PackedScene" uid="uid://bosup20nwuuis" path="res://MODELS/neonCity.glb" id="5_c5caj"]
 
 [sub_resource type="Gradient" id="bloom_grad"]
 colors = PackedColorArray(0.5, 0.15, 0.95, 0.5, 0.5, 0.15, 0.95, 0)
@@ -32,18 +25,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menuscr")
-
-[node name="Background" type="TextureRect" parent="." unique_id=1083652295]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("bg_tex")
-expand_mode = 1
-stretch_mode = 6
 
 [node name="TitleBloom" type="TextureRect" parent="." unique_id=1596969065]
 layout_mode = 1
@@ -127,3 +108,17 @@ theme_override_colors/font_color = Color(1, 0.35, 0.75, 1)
 theme_override_font_sizes/font_size = 22
 text = "⚠ CONNECT A CONTROLLER TO PLAY"
 horizontal_alignment = 1
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=578792107]
+transform = Transform3D(1, 0, 0, 0, 0.9903711, 0.13843793, 0, -0.13843793, 0.9903711, -2.0961947, 6.0911517, 0.13418955)
+
+[node name="Skybox" parent="." unique_id=788530130 instance=ExtResource("2_ro3ta")]
+
+[node name="BoostPad" parent="." unique_id=1235806876 instance=ExtResource("3_ro4st")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.0218687, 4.700541, -3.2492108)
+
+[node name="dxracer_goyim" parent="." unique_id=1658066617 instance=ExtResource("4_g1av8")]
+transform = Transform3D(1.1858119, 0, -1.3541971, 0, 1.8, 0, 1.3541971, 0, 1.1858119, -0.9940398, 2.8085399, -2.7221732)
+
+[node name="neonCity" parent="." unique_id=1921640536 instance=ExtResource("5_c5caj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2603378, -21.66468, -256.9828)
