@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c1ws8obev5107"
-path="res://.godot/imported/dxracer_goyim.glb-19b7ee715c0cefdb800bfa6533565dd7.scn"
+uid="uid://benx3a0yvu5v7"
+path="res://.godot/imported/goyim2.glb-46c80a32d80aeb2490df9e4c3f70632c.scn"
 
 [deps]
 
-source_file="res://MODELS/dxracer_goyim.glb"
-dest_files=["res://.godot/imported/dxracer_goyim.glb-19b7ee715c0cefdb800bfa6533565dd7.scn"]
+source_file="res://MODELS/goyim2.glb"
+dest_files=["res://.godot/imported/goyim2.glb-46c80a32d80aeb2490df9e4c3f70632c.scn"]
 
 [params]
 

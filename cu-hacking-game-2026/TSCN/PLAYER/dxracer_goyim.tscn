@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://8j7vx2o6kc3v"]
+
+[ext_resource type="PackedScene" uid="uid://c1ws8obev5107" path="res://MODELS/dxracer_goyim.glb" id="1_ev255"]
+[ext_resource type="Script" uid="uid://bq8n5ie6onlg2" path="res://TSCN/PLAYER/dxracer_goyim.gd" id="2_4y2li"]
+[ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="2_sm46i"]
+
+[node name="dxracer_goyim" unique_id=1658066617 instance=ExtResource("1_ev255")]
+transform = Transform3D(-7.86805e-08, 0, -1.8, 0, 1.8, 0, 1.8, 0, -7.86805e-08, 0, -0.7676116, 0)
+script = ExtResource("2_4y2li")
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(570821002) index="0" unique_id=1116518917]
+bones/1/position = Vector3(-0.054104697, 0.6984874, -0.017038587)
+bones/1/rotation = Quaternion(-0.01151484, -0.00034103778, -0.05990793, 0.9981375)
+bones/2/rotation = Quaternion(-0.01808323, -0.0005355753, -0.09408111, 0.9954002)
+bones/4/rotation = Quaternion(0.9146149, 0.3528871, 0.020259032, -0.19631563)
+bones/5/rotation = Quaternion(-0.15273263, -0.002660063, 0.4141034, 0.89732057)
+bones/8/rotation = Quaternion(0.009057619, 0.2459218, 0.9040569, -0.34945905)
+bones/9/rotation = Quaternion(-0.2366661, -0.02486351, -0.3501788, 0.9059502)
+bones/10/rotation = Quaternion(0.08304708, -0.015579321, 0.69825226, 0.7108476)
+bones/12/rotation = Quaternion(-0.9584319, 0.093809664, -0.24827407, 0.104728825)
+bones/13/rotation = Quaternion(0.33374768, 0.050418455, -0.09818923, 0.93617815)
+bones/14/rotation = Quaternion(0.0701122, 0.22609875, -0.05502027, 0.97001886)
+bones/15/rotation = Quaternion(0.05584446, 0.24037316, 0.95319784, -0.17468832)
+bones/16/rotation = Quaternion(-0.029033013, 0.08768771, -0.017347803, 0.99557376)
+bones/17/rotation = Quaternion(0.056224525, -0.5149465, 0.009664426, 0.85532194)
+bones/18/position = Vector3(0.46451584, 0.88344955, 0.056358848)
+bones/19/position = Vector3(0.04147747, 0.8911936, 0.10836854)
+
+[node name="Cube_002" parent="Armature/Skeleton3D" index="0" unique_id=1983094367]
+material_override = ExtResource("2_sm46i")

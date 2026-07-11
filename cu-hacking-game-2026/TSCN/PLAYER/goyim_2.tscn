@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dvui5wsbwbywu"]
+
+[ext_resource type="PackedScene" uid="uid://benx3a0yvu5v7" path="res://MODELS/goyim2.glb" id="1_p63yy"]
+[ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="2_pghso"]
+[ext_resource type="Script" uid="uid://bq8n5ie6onlg2" path="res://TSCN/PLAYER/dxracer_goyim.gd" id="2_w03gk"]
+
+[node name="goyim2" unique_id=863082526 instance=ExtResource("1_p63yy")]
+transform = Transform3D(-7.86805e-08, 0, -1.8, 0, 1.8, 0, 1.8, 0, -7.86805e-08, 0, 0, 0)
+script = ExtResource("2_w03gk")
+
+[node name="Cube_002" parent="Armature/Skeleton3D" parent_id_path=PackedInt32Array(951689506) index="0" unique_id=1266544622]
+material_override = ExtResource("2_pghso")

@@ -43,20 +43,20 @@ checkpoint_index = 2
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.5, 12)
 
 [node name="BoostPad0" parent="." unique_id=116102954 instance=ExtResource("5_boost")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 4)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.3, 4)
 
 [node name="BoostPad1" parent="." unique_id=1845396527 instance=ExtResource("5_boost")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -4)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.3, -4)
 
 [node name="BoostPad2" parent="." unique_id=752190068 instance=ExtResource("5_boost")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, -10)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -5, 0.3, -10)
 boost_value = 100.0
 
 [node name="BoostPad3" parent="." unique_id=734443139 instance=ExtResource("5_boost")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.3, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10, 0.3, 0)
 
 [node name="BoostPad4" parent="." unique_id=691488239 instance=ExtResource("5_boost")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 8)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -5, 0.3, 8)
 
 [node name="neonCity" parent="." unique_id=1976190268 instance=ExtResource("5_x7fi2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.62895, -0.021974564, 106.377174)

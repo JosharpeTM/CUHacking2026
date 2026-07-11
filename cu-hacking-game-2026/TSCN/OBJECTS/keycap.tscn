@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cnugixr3o4pni"]
+
+[ext_resource type="PackedScene" uid="uid://d3cvhteshd5oh" path="res://MODELS/keycap.glb" id="1_yyfvk"]
+[ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="2_nfjnf"]
+
+[node name="keycap" unique_id=428722567 instance=ExtResource("1_yyfvk")]
+
+[node name="Cube" parent="." index="0" unique_id=833843335]
+material_override = ExtResource("2_nfjnf")
