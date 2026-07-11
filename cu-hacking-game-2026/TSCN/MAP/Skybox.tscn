@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bb14apk6pbkte"]
+
+[ext_resource type="Shader" uid="uid://cv0g6wrmcuis0" path="res://SCRIPTS/MAP/Skybox/sky.gdshader" id="1_3ew5q"]
+[ext_resource type="Shader" uid="uid://bte1wxncb5cxa" path="res://SCRIPTS/MAP/Skybox/skygrid.gdshader" id="2_dcmhy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w644m"]
+shader = ExtResource("1_3ew5q")
+shader_parameter/top_color = Color(0.04, 0, 0.08, 1)
+shader_parameter/horizon_color = Color(0.55, 0.08, 0.65, 1)
+shader_parameter/bottom_color = Color(0, 0, 0, 1)
+shader_parameter/horizon_offset = 0.15
+shader_parameter/top_spread = 0.45
+shader_parameter/bottom_spread = 0.35
+shader_parameter/star_density = 0.988
+shader_parameter/star_twinkle_speed = 1.5
+
+[sub_resource type="Sky" id="Sky_3ew5q"]
+sky_material = SubResource("ShaderMaterial_w644m")
+
+[sub_resource type="Environment" id="Environment_dcmhy"]
+background_mode = 2
+sky = SubResource("Sky_3ew5q")
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0u6y"]
+render_priority = 0
+shader = ExtResource("2_dcmhy")
+shader_parameter/grid_color = Color(1, 0.1, 0.8, 1)
+shader_parameter/fog_color = Color(0.04, 0, 0.08, 1)
+shader_parameter/cell_size = 10.0
+shader_parameter/line_thickness = 0.1
+shader_parameter/fade_start = 275.0
+shader_parameter/fade_end = 900.0
+shader_parameter/scroll_speed = 8.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
+size = Vector2(2000, 2000)
+
+[node name="Skybox" type="Node3D" unique_id=788530130]
+
+[node name="cityEnviornment" type="WorldEnvironment" parent="." unique_id=44798899]
+environment = SubResource("Environment_dcmhy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=194351469]
+material_override = SubResource("ShaderMaterial_d0u6y")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_g4v7s")
