@@ -80,6 +80,17 @@ extends CharacterBody3D
 @export var drift_speed_penalty: float = 5.0       # extra deceleration (m/s^2) applied to current_speed while drifting — stops you from just holding the drift button forever
 @export var drift_max_speed: float = 35.0
 
+@export_category("Character Motion")
+# Cosmetic life for the skater mesh: a vertical BOB and a side-to-side SWAY while
+# driving (both scale with speed and only play while grounded), plus a hard lean
+# TILT into a powerslide. Purely visual — layered onto the character mesh on top
+# of the slope tilt, so it never touches the physics body, steering or camera.
+@export var bob_amplitude: float = 0.07        # metres of vertical bounce at full speed
+@export var bob_frequency: float = 11.0        # base bob rate (further scaled by speed)
+@export var sway_angle: float = 4.0            # degrees of side-to-side roll while driving
+@export var drift_tilt_angle: float = 20.0     # degrees the skater leans into a drift
+@export var character_lean_smoothing: float = 9.0  # how fast the drift lean eases in/out
+
 @export_category("Wall Impact")
 # When move_and_slide hits something roughly wall-shaped (near-horizontal
 # collision normal — steep/vertical normals are the ground/ramp, already
@@ -129,6 +140,10 @@ var _move_dir: Vector3 = Vector3.FORWARD  # actual horizontal movement direction
 var _drift_boost_bonus: float = 0.0  # extra top-speed cap left over from a drift boost
 var _drift_boost_timer: float = 0.0  # seconds remaining on that raised cap
 
+# --- Character motion state (cosmetic) ---
+var _bob_phase: float = 0.0        # advancing phase driving the bob/sway oscillation
+var _character_lean: float = 0.0   # smoothed roll (radians) for the drift tilt
+
 # Trail particle nodes — they live in the scene so they can be repositioned in
 # the editor. Boost trails fire while boosting; drive trails fire while rolling
 # normally. Two of each, one per side of the board.
@@ -152,6 +167,10 @@ var _drift_boost_timer: float = 0.0  # seconds remaining on that raised cap
 ]
 var _tilt_rest: Array[Transform3D] = []  # each node's authored transform, captured at _ready
 
+# The skater body that gets the bob/sway/drift-tilt life on top of the slope lean.
+@onready var _character_mesh: MeshInstance3D = $MeshInstance3D
+var _character_rest: Transform3D = Transform3D()  # its authored transform, captured at _ready
+
 func _ready() -> void:
 	_p = "p%d_" % player_id
 	add_to_group("Player")
@@ -159,6 +178,7 @@ func _ready() -> void:
 	# Remember where each node sits so the slope lean is applied relative to it.
 	for n in _tilt_nodes:
 		_tilt_rest.append(n.transform)
+	_character_rest = _character_mesh.transform
 
 
 func _physics_process(delta: float) -> void:
@@ -173,6 +193,7 @@ func _physics_process(delta: float) -> void:
 		_drift_charge = 0.0
 		apply_hover(delta)  # still settle onto the hover cushion at the start line
 		_update_slope_tilt(delta)
+		_update_character_motion(delta)  # eases the bob/lean back to rest while pinned
 		move_and_slide()
 		return
 
@@ -183,6 +204,7 @@ func _physics_process(delta: float) -> void:
 	handle_jump(delta)
 	apply_movement(delta)
 	_update_slope_tilt(delta)  # align colliders to the ramp before resolving collisions
+	_update_character_motion(delta)  # bob/sway/drift-tilt on the skater mesh, over the slope lean
 	var velocity_before_slide: Vector3 = velocity  # captured pre-collision, to measure impact speed
 	move_and_slide()
 	_handle_wall_impacts(velocity_before_slide)
@@ -590,3 +612,38 @@ func _update_slope_tilt(delta: float) -> void:
 	var tilt_xform := Transform3D(_tilt, Vector3.ZERO)
 	for i in _tilt_nodes.size():
 		_tilt_nodes[i].transform = tilt_xform * _tilt_rest[i]
+
+
+## Cosmetic life for the skater mesh, layered on top of the slope tilt (which has
+## already reset the mesh's transform this frame, so this override wins):
+##  - BOB: a vertical bounce that speeds up and grows with velocity, only while
+##    grounded (an airborne board floats steadily).
+##  - SWAY: a slower side-to-side roll off the same phase, so the body rocks as
+##    it rolls along.
+##  - TILT: a hard lean into a powerslide, easing in when the drift starts and
+##    back out when it ends.
+## None of this touches the physics body, steering, hover or camera — it only
+## re-poses the character mesh about the body origin.
+func _update_character_motion(delta: float) -> void:
+	var speed_factor: float = clamp(absf(current_speed) / max_speed, 0.0, 1.0)
+	var drive_factor: float = speed_factor if _grounded else 0.0
+
+	# Advance the bob phase faster the quicker we're going; keep a small idle rate
+	# so it never fully freezes while coasting.
+	_bob_phase += bob_frequency * (0.4 + speed_factor) * delta
+	var bob: float = sin(_bob_phase) * bob_amplitude * drive_factor
+	# Sway rolls at half the bob rate for a natural rocking cadence.
+	var sway: float = sin(_bob_phase * 0.5) * deg_to_rad(sway_angle) * drive_factor
+
+	# Drift tilt: lean into the slide (_drift_side is +1 right / -1 left), eased so
+	# it snaps in on drift start and relaxes out on release.
+	var target_lean: float = -_drift_side * deg_to_rad(drift_tilt_angle) if _drifting else 0.0
+	var weight: float = 1.0 - exp(-character_lean_smoothing * delta)
+	_character_lean = lerp(_character_lean, target_lean, weight)
+
+	# Roll about the forward (local Z) axis for the sway + drift lean, and bob up
+	# along local Y. Layer under the slope tilt so it reads relative to the ground.
+	var roll := Basis(Vector3(0.0, 0.0, 1.0), _character_lean + sway)
+	var anim_xform := Transform3D(roll, Vector3(0.0, bob, 0.0))
+	var tilt_xform := Transform3D(_tilt, Vector3.ZERO)
+	_character_mesh.transform = tilt_xform * anim_xform * _character_rest
