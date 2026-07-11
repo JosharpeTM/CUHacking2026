@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 ## ---------------------------------------------------------
 ## SKATER PLAYER CONTROLLER
-## Handles: accelerating, braking, turning, and jumping.
+## Handles: accelerating, braking, turning, jumping, and drifting.
 ## Attach to a CharacterBody3D with a CollisionShape3D and
 ## a visual mesh (skater model) as children.
 ## ---------------------------------------------------------
@@ -57,6 +57,39 @@ extends CharacterBody3D
 @export var boost_accel: float = 16.0        # forward thrust applied while boosting
 @export var boost_drain_rate: float = 33.0   # tank units spent per second of boost
 
+@export_category("Drift")
+# Hold the "drift" action while turning to break grip: instead of your velocity
+# snapping to face direction every frame, it eases toward it (see drift_grip_rate),
+# so the board slides sideways through the turn. Keep steering into the slide to
+# build charge; release (or run out of speed / leave the ground) to cash it in as
+# a speed kick — bigger the longer you held it. Needs an input action:
+#   Project > Project Settings > Input Map > add action "drift" -> bind to a
+#   shoulder button (L1/LB) or Shift, using the "p%d_drift" prefix convention
+#   (i.e. "p1_drift" / "p2_drift") like the other actions in this script.
+@export var drift_min_speed: float = 20.0           # minimum |speed| needed to start (or keep) a drift
+@export var drift_turn_multiplier: float = 2.5     # extra turn rate while drifting, so the slide actually carves
+@export var drift_grip_rate: float = 3.5           # how fast velocity direction catches up to facing while drifting — LOWER = more slide, HIGHER = snappier
+@export var drift_charge_rate: float = 1.0         # charge/sec built while actively steering into the drift
+@export var drift_tier1_charge: float = 0.5        # seconds held to reach tier 1
+@export var drift_tier2_charge: float = 1.1        # tier 2
+@export var drift_tier3_charge: float = 1.9        # tier 3 — the big one
+@export var drift_tier1_kick: float = 2.5          # instant speed granted at tier 1
+@export var drift_tier2_kick: float = 4.5          # tier 2
+@export var drift_tier3_kick: float = 7.5          # tier 3
+@export var drift_boost_duration: float = 0.7      # seconds the top-speed cap is raised after a boost, so friction/clamping doesn't eat the kick immediately
+@export var drift_speed_penalty: float = 5.0       # extra deceleration (m/s^2) applied to current_speed while drifting — stops you from just holding the drift button forever
+@export var drift_max_speed: float = 35.0
+
+@export_category("Wall Impact")
+# When move_and_slide hits something roughly wall-shaped (near-horizontal
+# collision normal — steep/vertical normals are the ground/ramp, already
+# handled by the hover system), a hard enough hit chops your speed and
+# punches the camera. Scales with impact speed like the landing shake does.
+@export var wall_impact_min_speed: float = 3.0     # below this impact speed, no penalty at all
+@export var wall_impact_max_speed: float = 14.0    # at/above this impact speed, full penalty + full trauma
+@export var wall_impact_speed_retained: float = 0.15  # fraction of current_speed kept after a full-strength hit (0 = dead stop)
+@export var wall_impact_max_trauma: float = 0.8
+
 @export_category("Camera Shake")
 # How much trauma (0..1) to feed the camera rig's shake on jump takeoff, and
 # the range used to scale landing shake by impact speed (fast fall = big hit).
@@ -64,6 +97,9 @@ extends CharacterBody3D
 @export var min_landing_impact_speed: float = 2.0   # below this, landing gives ~no shake
 @export var max_landing_impact_speed: float = 18.0  # at/above this, landing gives full trauma
 @export var max_landing_trauma: float = 0.85
+@export var drift_tier1_trauma: float = 0.25        # camera punch on a tier-1 drift release
+@export var drift_tier2_trauma: float = 0.5         # tier 2
+@export var drift_tier3_trauma: float = 0.9         # tier 3
 
 const BOOST_MAX: float = 100.0
 const BOOST_START: float = 50.0  # racers launch with a half tank
@@ -84,6 +120,14 @@ var _ground_normal: Vector3 = Vector3.UP  # surface normal under the board (from
 var _hover_correction: float = 0.0 # eased vertical trim that holds the board at hover_height
 var _tilt: Basis = Basis()         # current smoothed slope lean applied to the visuals
 var _p: String = "p1_"             # input action prefix, built from player_id
+
+# --- Drift state ---
+var _drifting: bool = false        # currently holding a powerslide
+var _drift_side: float = 1.0       # which way the slide was initiated (+1 right, -1 left); charging requires steering this way
+var _drift_charge: float = 0.0     # seconds spent actively steering into the current drift
+var _move_dir: Vector3 = Vector3.FORWARD  # actual horizontal movement direction — decoupled from facing while drifting
+var _drift_boost_bonus: float = 0.0  # extra top-speed cap left over from a drift boost
+var _drift_boost_timer: float = 0.0  # seconds remaining on that raised cap
 
 # Trail particle nodes — they live in the scene so they can be repositioned in
 # the editor. Boost trails fire while boosting; drive trails fire while rolling
@@ -111,6 +155,7 @@ var _tilt_rest: Array[Transform3D] = []  # each node's authored transform, captu
 func _ready() -> void:
 	_p = "p%d_" % player_id
 	add_to_group("Player")
+	_move_dir = -global_transform.basis.z
 	# Remember where each node sits so the slope lean is applied relative to it.
 	for n in _tilt_nodes:
 		_tilt_rest.append(n.transform)
@@ -124,19 +169,88 @@ func _physics_process(delta: float) -> void:
 		current_turn_rate = 0.0
 		velocity.x = 0.0
 		velocity.z = 0.0
+		_drifting = false
+		_drift_charge = 0.0
 		apply_hover(delta)  # still settle onto the hover cushion at the start line
 		_update_slope_tilt(delta)
 		move_and_slide()
 		return
 
+	handle_drift(delta)  # before turning, since it changes the turn rate this frame
 	handle_turning(delta)
 	handle_boost(delta)
 	handle_acceleration(delta)
 	handle_jump(delta)
 	apply_movement(delta)
 	_update_slope_tilt(delta)  # align colliders to the ramp before resolving collisions
+	var velocity_before_slide: Vector3 = velocity  # captured pre-collision, to measure impact speed
 	move_and_slide()
+	_handle_wall_impacts(velocity_before_slide)
 	_update_trails()
+
+
+## Powerslide: hold "drift" while steering to break grip and start a slide.
+## Keep steering into the slide to build charge through three tiers; letting go
+## of the button, dropping below drift_min_speed, or leaving the ground ends the
+## drift and cashes in whatever tier was reached as an instant speed kick.
+func handle_drift(delta: float) -> void:
+	var drift_held: bool = Input.is_action_pressed(_p + "drift")
+	var turn_input: float = Input.get_axis(_p + "turn_left", _p + "turn_right")
+	var can_drift: bool = _grounded and absf(current_speed) > drift_min_speed
+
+	if not _drifting and drift_held and can_drift and absf(turn_input) > 0.1:
+		_drifting = true
+		_drift_charge = 0.0
+		_drift_side = sign(turn_input)
+	elif _drifting and (not drift_held or not can_drift):
+		_release_drift()
+
+	if _drifting:
+		# Only charge while steering into the side the slide was locked to (or
+		# neutral). A hard counter-steer lets you fight the slide for control,
+		# but it stops the charge from climbing.
+		if turn_input == 0.0 or sign(turn_input) == _drift_side:
+			_drift_charge += drift_charge_rate * delta
+
+
+func _release_drift() -> void:
+	if _drift_charge >= drift_tier3_charge:
+		_apply_drift_boost(drift_tier3_kick, drift_tier3_trauma)
+	elif _drift_charge >= drift_tier2_charge:
+		_apply_drift_boost(drift_tier2_kick, drift_tier2_trauma)
+	elif _drift_charge >= drift_tier1_charge:
+		_apply_drift_boost(drift_tier1_kick, drift_tier1_trauma)
+	_drifting = false
+	_drift_charge = 0.0
+
+
+## Grants an instant speed kick and temporarily raises the top-speed cap
+## (drift_boost_duration) so handle_acceleration's clamp doesn't immediately
+## erase it. Also punches the camera — bigger tier, bigger punch.
+func _apply_drift_boost(kick: float, trauma: float) -> void:
+	current_speed += kick
+	_drift_boost_bonus = max(_drift_boost_bonus, kick)
+	_drift_boost_timer = drift_boost_duration
+	if _camera_rig:
+		_camera_rig.add_trauma(trauma)
+
+
+## Whether the skater is mid-powerslide (read by the HUD to show a charge meter,
+## or by trail/particle logic to switch to spark colors per tier).
+func is_drifting() -> bool:
+	return _drifting
+
+
+## Current drift tier (0 = not charged past tier 1 yet, 1-3 = tier reached).
+## Useful for coloring drift sparks blue/orange/purple like the tuning implies.
+func get_drift_tier() -> int:
+	if _drift_charge >= drift_tier3_charge:
+		return 3
+	elif _drift_charge >= drift_tier2_charge:
+		return 2
+	elif _drift_charge >= drift_tier1_charge:
+		return 1
+	return 0
 
 
 ## R1 boost: hold R1 to spend boost fuel for extra thrust and a raised top
@@ -168,6 +282,44 @@ func _set_emitting(trails: Array, on: bool) -> void:
 			t.emitting = on
 
 
+## Checks the collisions move_and_slide just resolved for a hard wall hit.
+## Ground/ramp contact is filtered out by normal — the hover system keeps the
+## body from ever really touching the ground, so a near-horizontal normal
+## reliably means a wall or prop. On a hard enough hit, current_speed is
+## slashed (scaled by how fast we were driving into it) and the current drift
+## is cancelled with no payout. Next frame's apply_movement rebuilds velocity
+## from the reduced current_speed, so nothing here needs to touch velocity
+## directly.
+func _handle_wall_impacts(pre_velocity: Vector3) -> void:
+	var strongest_impact: float = 0.0
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var normal: Vector3 = collision.get_normal()
+		if absf(normal.y) > 0.6:
+			continue  # steep/vertical normal = ground or ramp, not a wall
+		var into_wall: float = -pre_velocity.dot(normal)  # how fast we were driving into the surface
+		strongest_impact = max(strongest_impact, into_wall)
+
+	if strongest_impact < wall_impact_min_speed:
+		return
+
+	var t: float = clamp(
+		(strongest_impact - wall_impact_min_speed) / (wall_impact_max_speed - wall_impact_min_speed),
+		0.0, 1.0
+	)
+	var retained: float = lerp(1.0, wall_impact_speed_retained, t)
+	current_speed *= retained
+
+	# A hard hit blows the drift with no reward — no free charge for smacking a wall.
+	_drifting = false
+	_drift_charge = 0.0
+	_drift_boost_bonus = 0.0
+	_drift_boost_timer = 0.0
+
+	if _camera_rig:
+		_camera_rig.add_trauma(lerp(0.0, wall_impact_max_trauma, t))
+
+
 ## Whether the skater is actively spending boost this frame (read by the HUD
 ## gauge so it can glow while boosting).
 func is_boosting() -> bool:
@@ -188,6 +340,11 @@ func handle_turning(delta: float) -> void:
 	# Turning is more responsive at speed, but still possible while nearly stopped.
 	var speed_factor: float = clamp(abs(current_speed) / max_speed, 0.0, 1.0)
 	var effective_turn_speed: float = lerp(min_turn_speed, turn_speed, speed_factor)
+
+	# Drifting carves harder than a normal turn — this is what makes a powerslide
+	# actually change your heading instead of just sliding you in a straight line.
+	if _drifting:
+		effective_turn_speed *= drift_turn_multiplier
 
 	# Reverse the turn direction when skating backwards, like a real vehicle/board.
 	var direction_sign: float = sign(current_speed) if current_speed != 0.0 else 1.0
@@ -230,6 +387,21 @@ func handle_acceleration(delta: float) -> void:
 		current_speed += boost_accel * delta
 		top_speed = max_speed + boost_speed_bonus
 
+	# A drift boost temporarily raises the cap too, so the kick from
+	# _apply_drift_boost isn't immediately clamped back down. Ticks down here.
+	if _drift_boost_timer > 0.0:
+		_drift_boost_timer = max(_drift_boost_timer - delta, 0.0)
+		top_speed = max(top_speed, max_speed + _drift_boost_bonus)
+		if _drift_boost_timer == 0.0:
+			_drift_boost_bonus = 0.0
+
+	# Drifting bleeds speed steadily — you can't just hold the button forever
+	# for free grip-loss; you have to actually cash it in. handle_drift already
+	# ends the drift on its own once this drops you below drift_min_speed.
+	if _drifting:
+		current_speed -= drift_speed_penalty * delta
+		current_speed = min(current_speed, drift_max_speed)
+
 	current_speed = clamp(current_speed, -max_speed * 0.5, top_speed)  # reverse capped slower
 
 
@@ -254,12 +426,23 @@ func apply_movement(delta: float) -> void:
 		# instead of sinking and clipping its nose while the hover spring plays catch-up.
 		var slope_dir: Vector3 = forward.slide(_ground_normal)
 		slope_dir = slope_dir.normalized() if slope_dir.length() > 0.001 else forward
-		var drive: Vector3 = slope_dir * current_speed
+
+		if _drifting:
+			# Grip loosens: _move_dir eases toward the facing direction instead of
+			# snapping to it, so the board slides sideways through the turn rather
+			# than carving it cleanly. Lower drift_grip_rate = more slide.
+			var weight: float = 1.0 - exp(-drift_grip_rate * delta)
+			_move_dir = _move_dir.slerp(slope_dir, weight)
+		else:
+			_move_dir = slope_dir
+
+		var drive: Vector3 = _move_dir * current_speed
 		velocity.x = drive.x
 		velocity.z = drive.z
 		velocity.y += drive.y  # climb/descend the ramp, on top of the hover-height trim
 	else:
 		# Airborne: no surface to follow, just carry the flat heading (air control).
+		_move_dir = forward
 		velocity.x = forward.x * current_speed
 		velocity.z = forward.z * current_speed
 
