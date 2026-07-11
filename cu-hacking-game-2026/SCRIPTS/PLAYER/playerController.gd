@@ -144,6 +144,8 @@ var _drift_boost_timer: float = 0.0  # seconds remaining on that raised cap
 var _bob_phase: float = 0.0        # advancing phase driving the bob/sway oscillation
 var _character_lean: float = 0.0   # smoothed roll (radians) for the drift tilt
 
+var crash_cooldown: float = 0.0
+
 # Trail particle nodes — they live in the scene so they can be repositioned in
 # the editor. Boost trails fire while boosting; drive trails fire while rolling
 # normally. Two of each, one per side of the board.
@@ -207,7 +209,7 @@ func _physics_process(delta: float) -> void:
 	var velocity_before_slide: Vector3 = velocity  # captured pre-collision, to measure impact speed
 	move_and_slide()
 	_handle_wall_impacts(velocity_before_slide)
-	handle_collision()
+	handle_collision(delta)
 	_update_trails()
 
 
@@ -648,13 +650,16 @@ func _update_character_motion(delta: float) -> void:
 	var tilt_xform := Transform3D(_tilt, Vector3.ZERO)
 	_character_mesh.transform = tilt_xform * anim_xform * _character_rest
 
-func handle_collision() -> void:
+func handle_collision(delta: float) -> void:
+	crash_cooldown -= delta
+	
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
 		var normal := collision.get_normal()
 
 		# Only trigger on walls, not the ground
 		if abs(normal.y) < 0.5:
-			if !_crash_sound.playing:
-				_crash_sound.play()
+			if crash_cooldown <= 0.0:
+				$AudioStreamPlayer3.play()
+				crash_cooldown = 2.0 # seconds between crashes
 			break
