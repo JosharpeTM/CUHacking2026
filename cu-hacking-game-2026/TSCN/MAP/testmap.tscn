@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cbtd1o4r3j1lb" path="res://TSCN/OBJECTS/finnish_line.tscn" id="4_fnish"]
 [ext_resource type="PackedScene" uid="uid://cb0ostpad0001" path="res://TSCN/OBJECTS/boost_pad.tscn" id="5_boost"]
 [ext_resource type="PackedScene" uid="uid://dgjd43pucuc52" path="res://TSCN/MAP/neon_city.tscn" id="5_x7fi2"]
+[ext_resource type="AudioStream" uid="uid://0kp6msvy0u6d" path="res://Sound effects/freesound_community-arcade-countdown-7007.mp3" id="7_4h6jx"]
 
 [node name="Node3D" type="Node3D" unique_id=580968833]
 
@@ -55,3 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 8)
 
 [node name="neonCity" parent="." unique_id=1976190268 instance=ExtResource("5_x7fi2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.62895, -0.021974564, 106.377174)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1618400038]
+stream = ExtResource("7_4h6jx")
+autoplay = true
