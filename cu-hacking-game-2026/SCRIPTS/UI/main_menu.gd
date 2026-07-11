@@ -25,6 +25,15 @@ func _ready() -> void:
 	time_trial_button.pressed.connect(_on_time_trial)
 	quit_button.pressed.connect(_on_quit)
 
+	# Start loading the playable scenes on a background thread now, while the
+	# player is reading the menu, so pressing Play swaps to an already-parsed
+	# scene instead of hitching to load the map on the spot.
+	RaceManager.preload_race_scenes()
+	# Then render the heavy city map once offscreen so its shaders compile now
+	# (the real hitch) rather than on the first race frame. Deferred so the
+	# background load above has a chance to finish before we pull the map in.
+	RaceManager.warm_up_map.call_deferred()
+
 	_start_title_glow()
 
 	var best: float = RaceManager.load_best_time()
@@ -67,11 +76,11 @@ func _refresh_controller_state() -> void:
 
  
 func _on_race() -> void:
-	get_tree().change_scene_to_file(RaceManager.RACE_SCENE)
+	RaceManager.change_scene_preloaded(RaceManager.RACE_SCENE)
 
 
 func _on_time_trial() -> void:
-	get_tree().change_scene_to_file(RaceManager.TIME_TRIAL_SCENE)
+	RaceManager.change_scene_preloaded(RaceManager.TIME_TRIAL_SCENE)
 
 
 func _on_quit() -> void:

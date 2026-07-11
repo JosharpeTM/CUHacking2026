@@ -33,6 +33,11 @@ func _ready() -> void:
 	quit_button.pressed.connect(_on_quit)
 	play_again_button.grab_focus()
 
+	# The race scene's background load was consumed on the way into the race, so
+	# re-request it now while the results are up — Play Again then swaps to an
+	# already-parsed scene instead of hitching to reload the map.
+	RaceManager.preload_race_scenes()
+
 
 func _show_versus() -> void:
 	title_label.text = "RACE RESULTS"
@@ -67,7 +72,7 @@ func _show_time_trial() -> void:
 
 func _on_play_again() -> void:
 	var scene := RaceManager.TIME_TRIAL_SCENE if RaceManager.is_time_trial else RaceManager.RACE_SCENE
-	get_tree().change_scene_to_file(scene)
+	RaceManager.change_scene_preloaded(scene)
 
 
 func _on_menu() -> void:

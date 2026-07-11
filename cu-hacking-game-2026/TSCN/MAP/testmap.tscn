@@ -1,34 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs4mdhfa75c8x"]
+[gd_scene format=3 uid="uid://bs4mdhfa75c8x"]
 
+[ext_resource type="PackedScene" uid="uid://bb14apk6pbkte" path="res://TSCN/MAP/Skybox.tscn" id="1_5lrtl"]
 [ext_resource type="PackedScene" uid="uid://cn6s7ncp3gbo" path="res://TSCN/PLAYER/playerController.tscn" id="1_mwf44"]
-[ext_resource type="Material" uid="uid://cj3bxhcmpbgt6" path="res://MATERIALS/texture_01_blue.tres" id="2_rci68"]
 [ext_resource type="PackedScene" uid="uid://u6mpcoolgi1s" path="res://TSCN/OBJECTS/checkpoint.tscn" id="3_chkpt"]
 [ext_resource type="PackedScene" uid="uid://cbtd1o4r3j1lb" path="res://TSCN/OBJECTS/finnish_line.tscn" id="4_fnish"]
 [ext_resource type="PackedScene" uid="uid://cb0ostpad0001" path="res://TSCN/OBJECTS/boost_pad.tscn" id="5_boost"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwf44"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_rci68"]
-sky_material = SubResource("ProceduralSkyMaterial_mwf44")
-
-[sub_resource type="Environment" id="Environment_jcb4u"]
-background_mode = 2
-sky = SubResource("Sky_rci68")
-glow_enabled = true
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
-material = ExtResource("2_rci68")
-size = Vector2(30, 30)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mwf44"]
-data = PackedVector3Array(15, 0, 15, -15, 0, 15, 15, 0, -15, -15, 0, 15, -15, 0, -15, 15, 0, -15)
+[ext_resource type="PackedScene" uid="uid://dgjd43pucuc52" path="res://TSCN/MAP/neon_city.tscn" id="5_x7fi2"]
 
 [node name="Node3D" type="Node3D" unique_id=580968833]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=746790990]
-environment = SubResource("Environment_jcb4u")
+[node name="Skybox" parent="." unique_id=788530130 instance=ExtResource("1_5lrtl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3798733, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=312882800]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -36,56 +18,40 @@ shadow_enabled = true
 
 [node name="Player1" parent="." unique_id=1270526261 instance=ExtResource("1_mwf44")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.9826598, 12)
-player_id = 1
 
-[node name="Player2" parent="." instance=ExtResource("1_mwf44")]
+[node name="Player2" parent="." unique_id=89401370 instance=ExtResource("1_mwf44")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.9826598, 12)
 player_id = 2
 
-[node name="Checkpoint0" parent="." instance=ExtResource("3_chkpt")]
+[node name="Checkpoint0" parent="." unique_id=729185279 instance=ExtResource("3_chkpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -10)
-checkpoint_index = 0
 
-[node name="Checkpoint1" parent="." instance=ExtResource("3_chkpt")]
+[node name="Checkpoint1" parent="." unique_id=662194546 instance=ExtResource("3_chkpt")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10, 0.5, -10)
 checkpoint_index = 1
 
-[node name="Checkpoint2" parent="." instance=ExtResource("3_chkpt")]
+[node name="Checkpoint2" parent="." unique_id=1045382436 instance=ExtResource("3_chkpt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, 8)
 checkpoint_index = 2
 
-[node name="FinnishLine" parent="." instance=ExtResource("4_fnish")]
+[node name="FinnishLine" parent="." unique_id=2028927865 instance=ExtResource("4_fnish")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0.5, 12)
 
-[node name="BoostPad0" parent="." instance=ExtResource("5_boost")]
+[node name="BoostPad0" parent="." unique_id=116102954 instance=ExtResource("5_boost")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 4)
 
-[node name="BoostPad1" parent="." instance=ExtResource("5_boost")]
+[node name="BoostPad1" parent="." unique_id=1845396527 instance=ExtResource("5_boost")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -4)
 
-[node name="BoostPad2" parent="." instance=ExtResource("5_boost")]
+[node name="BoostPad2" parent="." unique_id=752190068 instance=ExtResource("5_boost")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, -10)
 boost_value = 100.0
 
-[node name="BoostPad3" parent="." instance=ExtResource("5_boost")]
+[node name="BoostPad3" parent="." unique_id=734443139 instance=ExtResource("5_boost")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.3, 0)
 
-[node name="BoostPad4" parent="." instance=ExtResource("5_boost")]
+[node name="BoostPad4" parent="." unique_id=691488239 instance=ExtResource("5_boost")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 8)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=591019673]
-mesh = SubResource("PlaneMesh_g4v7s")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=803903672]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1835780430]
-shape = SubResource("ConcavePolygonShape3D_mwf44")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2098296064]
-transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 29, -2.6, 0)
-mesh = SubResource("PlaneMesh_g4v7s")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=1336951180]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1066119341]
-shape = SubResource("ConcavePolygonShape3D_mwf44")
+[node name="neonCity" parent="." unique_id=1976190268 instance=ExtResource("5_x7fi2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.62895, -0.021974564, 106.377174)

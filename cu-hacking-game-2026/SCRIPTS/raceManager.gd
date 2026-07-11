@@ -20,6 +20,9 @@ const MENU_SCENE := "res://TSCN/UI/main_menu.tscn"
 const RACE_SCENE := "res://TSCN/MAP/race.tscn"
 const TIME_TRIAL_SCENE := "res://TSCN/MAP/time_trial.tscn"
 const RESULTS_SCENE := "res://TSCN/UI/results.tscn"
+# The heavy shared geometry both race modes embed (a 21 MB GLB city). Warmed up
+# on the menu so its shaders don't compile on the first race frame.
+const MAP_SCENE := "res://TSCN/MAP/neon_city.tscn"
 
 # Where the best time-trial time is persisted between sessions.
 const SCORE_PATH := "user://scores.cfg"
@@ -33,6 +36,10 @@ var players := {}  # player_id -> {elapsed, splits: Array, next_cp, finished, fi
 var is_time_trial := false
 var previous_best := 0.0   # best time BEFORE this run (0.0 == no record yet)
 var is_new_record := false # did the run just set a new best?
+
+# Shader warm-up state (see warm_up_map).
+var _map_warmed := false
+var _warm_viewport: SubViewport = null
 
 
 func _ready() -> void:
@@ -54,6 +61,118 @@ func _grab_window_focus() -> void:
 	var win := get_window()
 	if win:
 		win.grab_focus()
+
+
+## --- Scene preloading -------------------------------------------------
+## Loading the race / time-trial scenes (the neon city map especially) on the
+## frame the player presses Play causes a visible hitch. Instead we start
+## loading them on a background thread while the menu is up, then swap to the
+## already-parsed scene instantly. The menu calls preload_race_scenes() from
+## its _ready() and change_scene_preloaded() from its buttons.
+
+## Kick off background loads for the playable scenes. Safe to call repeatedly —
+## a path already loading or loaded is skipped.
+func preload_race_scenes() -> void:
+	for path in [RACE_SCENE, TIME_TRIAL_SCENE]:
+		if ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+			ResourceLoader.load_threaded_request(path)
+
+
+## Switch to a scene we (hopefully) preloaded in the background. If preloading
+## already finished this swaps with no disk hit; otherwise it blocks only for
+## whatever loading remains, and falls back to a plain load if anything failed.
+func change_scene_preloaded(path: String) -> void:
+	if ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+		# Never requested (or already consumed) — start it now.
+		if ResourceLoader.load_threaded_request(path) != OK:
+			get_tree().change_scene_to_file(path)
+			return
+	# Blocks until the load finishes; returns immediately if it already has.
+	var scene := ResourceLoader.load_threaded_get(path)
+	if scene is PackedScene:
+		get_tree().change_scene_to_packed(scene)
+	else:
+		get_tree().change_scene_to_file(path)
+
+
+## Compile the neon city's shaders and upload its meshes/textures to the GPU
+## ahead of time, so the first race frame doesn't hitch while the Forward+
+## renderer compiles them on the spot. We render the map once in a tiny hidden
+## SubViewport and keep it resident for the session (shaders are cached engine-
+## wide once compiled, and holding the instance keeps its GPU buffers warm).
+## Only the static geometry is instanced — no scripts, players or HUD — so this
+## has no effect on game state. Safe to call repeatedly; only the first does work.
+func warm_up_map() -> void:
+	if _map_warmed:
+		return
+	_map_warmed = true
+
+	var packed := load(MAP_SCENE) as PackedScene
+	if packed == null:
+		_map_warmed = false  # let a later call retry if the load isn't ready yet
+		return
+
+	# Tiny offscreen viewport with its own world so it never shows on screen or
+	# touches the real game world. UPDATE_ONCE renders a single frame — enough to
+	# force shader compilation — then stops, so it costs nothing ongoing.
+	var vp := SubViewport.new()
+	vp.size = Vector2i(64, 64)
+	vp.own_world_3d = true
+	vp.render_target_update_mode = SubViewport.UPDATE_ONCE
+
+	# A directional light with shadows + a glow environment so the *lit/shadowed*
+	# material variants and the glow post-pass compile now too — those are exactly
+	# what the real race scene uses, so nothing is left to compile on the spot.
+	var light := DirectionalLight3D.new()
+	light.shadow_enabled = true
+	vp.add_child(light)
+
+	var env := Environment.new()
+	env.background_mode = Environment.BG_COLOR
+	env.glow_enabled = true
+	var world_env := WorldEnvironment.new()
+	world_env.environment = env
+	vp.add_child(world_env)
+
+	var map := packed.instantiate()
+	vp.add_child(map)
+
+	# Frame the whole city so every material is inside the frustum and actually
+	# gets drawn (and thus compiled) this frame — a camera that sees nothing
+	# would compile nothing.
+	var cam := Camera3D.new()
+	cam.current = true
+	vp.add_child(cam)
+	add_child(vp)  # in-tree so global transforms (for the AABB) are valid
+	_aim_camera_at(cam, _world_aabb(map))
+
+	_warm_viewport = vp
+
+
+## Merged world-space bounds of every VisualInstance3D under `node`.
+func _world_aabb(node: Node) -> AABB:
+	var bounds := AABB()
+	var seeded := false
+	for child in node.find_children("*", "VisualInstance3D", true, false):
+		var vi := child as VisualInstance3D
+		var world_box := vi.global_transform * vi.get_aabb()
+		if not seeded:
+			bounds = world_box
+			seeded = true
+		else:
+			bounds = bounds.merge(world_box)
+	return bounds
+
+
+## Pull the camera back so the whole AABB fits in view.
+func _aim_camera_at(cam: Camera3D, bounds: AABB) -> void:
+	if bounds.size == Vector3.ZERO:
+		return
+	var center := bounds.get_center()
+	var radius := bounds.size.length() * 0.5
+	cam.far = maxf(radius * 5.0, 100.0)
+	cam.global_position = center + Vector3(radius, radius, radius)
+	cam.look_at(center, Vector3.UP)
 
 
 ## Reset all race state and start the clocks. Called by the race scene
