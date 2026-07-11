@@ -363,7 +363,19 @@ func handle_turning(delta: float) -> void:
 func handle_acceleration(delta: float) -> void:
 	var accelerate: bool = Input.is_action_pressed(_p + "accelerate")
 	var brake: bool = Input.is_action_pressed(_p + "brake")
+	
+	if absf(current_speed) > 0.1:
+		if !$AudioStreamPlayer.playing:
+			$AudioStreamPlayer.play()
+	
+		# Increase pitch with speed, lower pitch when slowing down
+		var speed_ratio: float = absf(current_speed) / max_speed
+		$AudioStreamPlayer.pitch_scale = lerp(0.6, 2.0, speed_ratio)
 
+	else:
+		if $AudioStreamPlayer.playing:
+			$AudioStreamPlayer.stop()
+		
 	if accelerate and not brake:
 		current_speed += acceleration_speed * delta
 	elif brake and not accelerate:
