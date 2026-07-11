@@ -658,7 +658,7 @@ func handle_collision(delta: float) -> void:
 		var normal := collision.get_normal()
 
 		# Only trigger on walls, not the ground
-		if abs(normal.y) < 0.5:
+		if abs(normal.y) < 0.5 and current_speed > 5:
 			if crash_cooldown <= 0.0:
 				$AudioStreamPlayer3.play()
 				crash_cooldown = 2.0 # seconds between crashes
