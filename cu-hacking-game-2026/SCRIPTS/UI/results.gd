@@ -4,10 +4,11 @@ extends Control
 ## RACE RESULTS SCREEN
 ## Shown once both players have crossed the finish line.
 ## Reads final times from the RaceManager autoload and offers
-## Play Again / Quit. Buttons are navigable with either
-## controller's d-pad (built-in ui_* actions) or keyboard.
+## Play Again / Main Menu / Quit. Buttons are navigable with
+## either controller's d-pad/stick + face buttons.
 ## ---------------------------------------------------------
 
+@onready var title_label: Label = $CenterContainer/VBoxContainer/Title
 @onready var winner_label: Label = $CenterContainer/VBoxContainer/WinnerLabel
 @onready var p1_time_label: Label = $CenterContainer/VBoxContainer/P1TimeLabel
 @onready var p2_time_label: Label = $CenterContainer/VBoxContainer/P2TimeLabel
@@ -22,18 +23,10 @@ func _ready() -> void:
 		RaceManager.start_race()
 		RaceManager.race_active = false
 
-	var t1: float = RaceManager.players[1].final_time
-	var t2: float = RaceManager.players[2].final_time
-
-	p1_time_label.text = "Player 1   %s" % RaceManager.format_time(t1)
-	p2_time_label.text = "Player 2   %s" % RaceManager.format_time(t2)
-
-	if t1 < t2:
-		winner_label.text = "Player 1 wins!"
-	elif t2 < t1:
-		winner_label.text = "Player 2 wins!"
+	if RaceManager.is_time_trial:
+		_show_time_trial()
 	else:
-		winner_label.text = "It's a tie!"
+		_show_versus()
 
 	play_again_button.pressed.connect(_on_play_again)
 	menu_button.pressed.connect(_on_menu)
@@ -41,8 +34,40 @@ func _ready() -> void:
 	play_again_button.grab_focus()
 
 
+func _show_versus() -> void:
+	title_label.text = "RACE RESULTS"
+	var t1: float = RaceManager.players[1].final_time
+	var t2: float = RaceManager.players[2].final_time
+
+	p1_time_label.text = "PLAYER 1   %s" % RaceManager.format_time(t1)
+	p2_time_label.text = "PLAYER 2   %s" % RaceManager.format_time(t2)
+
+	if t1 < t2:
+		winner_label.text = "PLAYER 1 WINS!"
+	elif t2 < t1:
+		winner_label.text = "PLAYER 2 WINS!"
+	else:
+		winner_label.text = "IT'S A TIE!"
+
+
+func _show_time_trial() -> void:
+	title_label.text = "TIME TRIAL"
+	var t: float = RaceManager.players[1].final_time
+	# After finishing, load_best_time() is the record including this run.
+	var best: float = RaceManager.load_best_time()
+
+	p1_time_label.text = "YOUR TIME   %s" % RaceManager.format_time(t)
+	p2_time_label.text = "BEST TIME   %s" % RaceManager.format_time(best)
+
+	if RaceManager.is_new_record:
+		winner_label.text = "NEW RECORD!"
+	else:
+		winner_label.text = "FINISHED!"
+
+
 func _on_play_again() -> void:
-	get_tree().change_scene_to_file(RaceManager.RACE_SCENE)
+	var scene := RaceManager.TIME_TRIAL_SCENE if RaceManager.is_time_trial else RaceManager.RACE_SCENE
+	get_tree().change_scene_to_file(scene)
 
 
 func _on_menu() -> void:

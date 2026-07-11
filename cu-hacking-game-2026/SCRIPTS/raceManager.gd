@@ -13,18 +13,32 @@ signal player_finished(player_id: int, final_time: float)
 const TOTAL_CHECKPOINTS := 3
 const MENU_SCENE := "res://TSCN/UI/main_menu.tscn"
 const RACE_SCENE := "res://TSCN/MAP/race.tscn"
+const TIME_TRIAL_SCENE := "res://TSCN/MAP/time_trial.tscn"
 const RESULTS_SCENE := "res://TSCN/UI/results.tscn"
 
+# Where the best time-trial time is persisted between sessions.
+const SCORE_PATH := "user://scores.cfg"
+
 var race_active := false
-var race_elapsed := 0.0  # shared race clock, runs until BOTH players finish
+var race_elapsed := 0.0  # shared race clock, runs until every racer finishes
 var players := {}  # player_id -> {elapsed, splits: Array, next_cp, finished, final_time}
 
+# Mode + time-trial result state, read by the results screen.
+var is_time_trial := false
+var previous_best := 0.0   # best time BEFORE this run (0.0 == no record yet)
+var is_new_record := false # did the run just set a new best?
 
-## Reset all race state and start the clocks. Called by race.gd when
-## the race scene loads (so "Play Again" resets everything for free).
-func start_race() -> void:
+
+## Reset all race state and start the clocks. Called by the race scene
+## when it loads (so "Play Again" resets everything for free).
+## Pass time_trial=true for the single-player (Player 1 only) mode.
+func start_race(time_trial := false) -> void:
+	is_time_trial = time_trial
+	is_new_record = false
+	previous_best = 0.0
+	var ids: Array = [1] if time_trial else [1, 2]
 	players = {}
-	for pid in [1, 2]:
+	for pid in ids:
 		players[pid] = {
 			"elapsed": 0.0,
 			"splits": [],
@@ -79,6 +93,8 @@ func player_finished_at_line(player_id: int) -> bool:
 			all_done = false
 	if all_done:
 		race_active = false
+		if is_time_trial:
+			_finalize_time_trial()
 		get_tree().change_scene_to_file.call_deferred(RESULTS_SCENE)
 	return true
 
@@ -89,6 +105,32 @@ func get_time(player_id: int) -> float:
 		return 0.0
 	var p: Dictionary = players[player_id]
 	return p.final_time if p.finished else p.elapsed
+
+
+## Compare Player 1's finish time to the stored best and persist it if
+## it's a new record. Sets previous_best / is_new_record for the results
+## screen to read.
+func _finalize_time_trial() -> void:
+	var t: float = players[1].final_time
+	previous_best = load_best_time()
+	is_new_record = previous_best <= 0.0 or t < previous_best
+	if is_new_record:
+		_save_best_time(t)
+
+
+## Best saved time-trial time, or 0.0 if none has been set yet.
+func load_best_time() -> float:
+	var cfg := ConfigFile.new()
+	if cfg.load(SCORE_PATH) != OK:
+		return 0.0
+	return cfg.get_value("time_trial", "best_time", 0.0)
+
+
+func _save_best_time(t: float) -> void:
+	var cfg := ConfigFile.new()
+	cfg.load(SCORE_PATH)  # keep any other stored values; fresh if missing
+	cfg.set_value("time_trial", "best_time", t)
+	cfg.save(SCORE_PATH)
 
 
 static func format_time(t: float) -> String:

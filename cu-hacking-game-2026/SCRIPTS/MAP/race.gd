@@ -12,6 +12,7 @@ extends Node
 @onready var p2_world_camera: Camera3D = $HBoxContainer/SVC1/SV1/Track/Player2/SpringArm3D/Camera3D
 @onready var p2_view_camera: Camera3D = $HBoxContainer/SVC2/SV2/P2Camera
 @onready var timer_label: Label = $SharedHUD/TimerLabel
+@onready var divider: Panel = $HBoxContainer/Divider
 @onready var players := {
 	1: $HBoxContainer/SVC1/SV1/Track/Player1,
 	2: $HBoxContainer/SVC1/SV1/Track/Player2,
@@ -29,6 +30,11 @@ func _ready() -> void:
 	process_priority = 100
 	for pid in players:
 		_spawn_transforms[pid] = players[pid].global_transform
+
+	# Pulse the split-screen divider's neon glow so the seam feels alive.
+	var pulse := create_tween().set_loops().set_trans(Tween.TRANS_SINE)
+	pulse.tween_property(divider, "self_modulate", Color(1, 1, 1, 1), 0.9)
+	pulse.tween_property(divider, "self_modulate", Color(0.7, 0.7, 0.85, 1), 0.9)
 
 
 func _process(_delta: float) -> void:

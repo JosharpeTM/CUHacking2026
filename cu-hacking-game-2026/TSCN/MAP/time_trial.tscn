@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c1tmtrialscn0"]
+
+[ext_resource type="Script" path="res://SCRIPTS/MAP/time_trial.gd" id="1_ttscr"]
+[ext_resource type="PackedScene" uid="uid://bs4mdhfa75c8x" path="res://TSCN/MAP/testmap.tscn" id="2_track"]
+[ext_resource type="PackedScene" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
+
+[node name="TimeTrial" type="Node"]
+script = ExtResource("1_ttscr")
+
+[node name="Track" parent="." instance=ExtResource("2_track")]
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="SharedHUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TimerLabel" type="Label" parent="SharedHUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_right = 160.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9, 0.6, 1, 1)
+theme_override_colors/font_outline_color = Color(0.3, 0.05, 0.55, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "00:00.000"
+horizontal_alignment = 1
+vertical_alignment = 1
