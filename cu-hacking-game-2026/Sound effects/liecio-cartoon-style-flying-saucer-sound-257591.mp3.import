@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bnas7w2uaicda"
+path="res://.godot/imported/liecio-cartoon-style-flying-saucer-sound-257591.mp3-fbb527c0128515bb793c91bb754c119f.mp3str"
+
+[deps]
+
+source_file="res://Sound effects/liecio-cartoon-style-flying-saucer-sound-257591.mp3"
+dest_files=["res://.godot/imported/liecio-cartoon-style-flying-saucer-sound-257591.mp3-fbb527c0128515bb793c91bb754c119f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
