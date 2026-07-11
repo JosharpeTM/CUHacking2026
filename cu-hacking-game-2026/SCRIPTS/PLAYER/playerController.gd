@@ -162,14 +162,12 @@ var _character_lean: float = 0.0   # smoothed roll (radians) for the drift tilt
 # to a steep ramp and clear it — the CharacterBody3D transform itself stays
 # upright, so movement, steering and the camera rig are unaffected.
 @onready var _tilt_nodes: Array[Node3D] = [
-	$MeshInstance3D, $MeshInstance3D2,
-	$CollisionShape3D, $CollisionShape3D2,
-	$BoostTrail, $BoostTrail2, $DriveTrail, $DriveTrail2, $HoverJet,
+	$dxracer_goyim,$CollisionShape3D,$BoostTrail, $BoostTrail2, $DriveTrail, $DriveTrail2, $HoverJet,
 ]
 var _tilt_rest: Array[Transform3D] = []  # each node's authored transform, captured at _ready
 
 # The skater body that gets the bob/sway/drift-tilt life on top of the slope lean.
-@onready var _character_mesh: MeshInstance3D = $MeshInstance3D
+@onready var _character_mesh = $dxracer_goyim
 var _character_rest: Transform3D = Transform3D()  # its authored transform, captured at _ready
 
 func _ready() -> void:
