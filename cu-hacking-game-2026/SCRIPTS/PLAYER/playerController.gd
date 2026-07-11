@@ -57,6 +57,14 @@ extends CharacterBody3D
 @export var boost_accel: float = 16.0        # forward thrust applied while boosting
 @export var boost_drain_rate: float = 33.0   # tank units spent per second of boost
 
+@export_category("Camera Shake")
+# How much trauma (0..1) to feed the camera rig's shake on jump takeoff, and
+# the range used to scale landing shake by impact speed (fast fall = big hit).
+@export var jump_trauma: float = 0.2
+@export var min_landing_impact_speed: float = 2.0   # below this, landing gives ~no shake
+@export var max_landing_impact_speed: float = 18.0  # at/above this, landing gives full trauma
+@export var max_landing_trauma: float = 0.85
+
 const BOOST_MAX: float = 100.0
 const BOOST_START: float = 50.0  # racers launch with a half tank
 const DRIVE_TRAIL_MIN_SPEED: float = 1.0  # min speed before the drive trails kick in
@@ -85,6 +93,9 @@ var _p: String = "p1_"             # input action prefix, built from player_id
 # Hover jet under the board: always on, drifting slowly, but flares faster while
 # airborne (i.e. during a jump).
 @onready var _hover_jet: GPUParticles3D = $HoverJet
+# Camera rig (SpringArm3D, see camera_look.gd) — used to trigger shake on jump
+# takeoff and landing. Adjust the path if your camera rig lives somewhere else.
+@onready var _camera_rig: SpringArm3D = $SpringArm3D
 
 # The child nodes that lean with the slope: the visuals AND the collision shapes.
 # Tilting the colliders (not just the meshes) is what lets the board ride parallel
@@ -226,6 +237,8 @@ func handle_jump(_delta: float) -> void:
 	if _grounded and Input.is_action_just_pressed(_p + "jump"):
 		velocity.y = jump_velocity
 		_jump_active = true  # keep the hover cushion off until we crest the jump
+		if _camera_rig:
+			_camera_rig.add_trauma(jump_trauma)
 
 
 func apply_movement(delta: float) -> void:
@@ -259,8 +272,12 @@ func apply_movement(delta: float) -> void:
 ## — an eased trim that nudges the board back to hover_height. Setting velocity.y
 ## absolutely each frame (correction here, +drive.y in apply_movement) keeps the
 ## two from compounding. While rising fast (a fresh jump) the cushion yields and
-## plain gravity takes over. Sets _grounded in place of is_on_floor().
+## plain gravity takes over. Sets _grounded in place of is_on_floor(), and fires
+## a landing shake on the frame we transition from airborne to grounded.
 func apply_hover(delta: float) -> void:
+	var was_grounded: bool = _grounded
+	var incoming_velocity_y: float = velocity.y  # captured before hover/gravity touch it this frame
+
 	var space_state := get_world_3d().direct_space_state
 	var b: Basis = global_transform.basis
 	var origin: Vector3 = global_position
@@ -313,6 +330,18 @@ func apply_hover(delta: float) -> void:
 	var target_correction: float = (hover_height - nearest) * hover_stiffness
 	_hover_correction = move_toward(_hover_correction, target_correction, hover_damping * delta)
 	velocity.y = _hover_correction
+
+	# We just landed this frame (airborne -> grounded): shake the camera, scaled
+	# by how hard we hit. incoming_velocity_y is negative while falling, so a
+	# bigger fall gives a bigger (positive) impact speed.
+	if not was_grounded and _camera_rig:
+		var impact_speed: float = max(-incoming_velocity_y, 0.0)
+		if impact_speed > min_landing_impact_speed:
+			var t: float = clamp(
+				(impact_speed - min_landing_impact_speed) / (max_landing_impact_speed - min_landing_impact_speed),
+				0.0, 1.0
+			)
+			_camera_rig.add_trauma(lerp(0.0, max_landing_trauma, t))
 
 
 ## Surface normal fitted across the four edge probes — far steadier than a single
