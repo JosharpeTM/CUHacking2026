@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjgkb4blj6kpm"
+path="res://.godot/imported/dragon-studio-car-crash-sound-376882 (1).mp3-eb5e5cf27fee2c9e1caab3dcca358bb8.mp3str"
+
+[deps]
+
+source_file="res://Sound effects/dragon-studio-car-crash-sound-376882 (1).mp3"
+dest_files=["res://.godot/imported/dragon-studio-car-crash-sound-376882 (1).mp3-eb5e5cf27fee2c9e1caab3dcca358bb8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

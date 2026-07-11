@@ -156,6 +156,7 @@ var _character_lean: float = 0.0   # smoothed roll (radians) for the drift tilt
 # takeoff and landing. Adjust the path if your camera rig lives somewhere else.
 @onready var _camera_rig: SpringArm3D = $SpringArm3D
 
+@onready var _crash_sound: AudioStreamPlayer = $AudioStreamPlayer3
 # The child nodes that lean with the slope: the visuals AND the collision shapes.
 # Tilting the colliders (not just the meshes) is what lets the board ride parallel
 # to a steep ramp and clear it — the CharacterBody3D transform itself stays
@@ -208,6 +209,7 @@ func _physics_process(delta: float) -> void:
 	var velocity_before_slide: Vector3 = velocity  # captured pre-collision, to measure impact speed
 	move_and_slide()
 	_handle_wall_impacts(velocity_before_slide)
+	handle_collision()
 	_update_trails()
 
 
@@ -647,3 +649,14 @@ func _update_character_motion(delta: float) -> void:
 	var anim_xform := Transform3D(roll, Vector3(0.0, bob, 0.0))
 	var tilt_xform := Transform3D(_tilt, Vector3.ZERO)
 	_character_mesh.transform = tilt_xform * anim_xform * _character_rest
+
+func handle_collision() -> void:
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var normal := collision.get_normal()
+
+		# Only trigger on walls, not the ground
+		if abs(normal.y) < 0.5:
+			if !_crash_sound.playing:
+				_crash_sound.play()
+			break
