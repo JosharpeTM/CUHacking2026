@@ -89,7 +89,8 @@ extends CharacterBody3D
 @export var bob_frequency: float = 11.0        # base bob rate (further scaled by speed)
 @export var sway_angle: float = 4.0            # degrees of side-to-side roll while driving
 @export var drift_tilt_angle: float = 20.0     # degrees the skater leans into a drift
-@export var character_lean_smoothing: float = 9.0  # how fast the drift lean eases in/out
+@export var turn_lean_angle: float = 6.0       # degrees the skater leans into a normal (non-drift) turn — a subtle version of the drift lean
+@export var character_lean_smoothing: float = 9.0  # how fast the drift/turn lean eases in/out
 
 @export_category("Wall Impact")
 # When move_and_slide hits something roughly wall-shaped (near-horizontal
@@ -664,9 +665,17 @@ func _update_character_motion(delta: float) -> void:
 	# Sway rolls at half the bob rate for a natural rocking cadence.
 	var sway: float = sin(_bob_phase * 0.5) * deg_to_rad(sway_angle) * drive_factor
 
-	# Drift tilt: lean into the slide (_drift_side is +1 right / -1 left), eased so
-	# it snaps in on drift start and relaxes out on release.
-	var target_lean: float = -_drift_side * deg_to_rad(drift_tilt_angle) if _drifting else 0.0
+	# Lean into the turn. A full drift leans hard into the slide (_drift_side is
+	# +1 right / -1 left); a normal turn gets a much gentler lean driven by how hard
+	# we're actually turning (current_turn_rate), scaled by speed so it only shows
+	# while moving. Both feed the same eased _character_lean, so easing out of a drift
+	# blends straight into the normal-turn lean instead of snapping to level.
+	var target_lean: float
+	if _drifting:
+		target_lean = -_drift_side * deg_to_rad(drift_tilt_angle)
+	else:
+		var turn_ratio: float = clamp(current_turn_rate / turn_speed, -1.0, 1.0)
+		target_lean = -turn_ratio * deg_to_rad(turn_lean_angle) * drive_factor
 	var weight: float = 1.0 - exp(-character_lean_smoothing * delta)
 	_character_lean = lerp(_character_lean, target_lean, weight)
 
