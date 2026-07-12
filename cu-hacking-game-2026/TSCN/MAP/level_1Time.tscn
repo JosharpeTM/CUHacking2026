@@ -1,19 +1,19 @@
-[gd_scene format=4 uid="uid://blnwstyisbrmn"]
+[gd_scene format=4 uid="uid://cm3ygj6au4sfo"]
 
-[ext_resource type="PackedScene" uid="uid://dgjd43pucuc52" path="res://TSCN/MAP/neon_city.tscn" id="1_oym7m"]
-[ext_resource type="PackedScene" uid="uid://bb14apk6pbkte" path="res://TSCN/MAP/Skybox.tscn" id="2_diyha"]
-[ext_resource type="PackedScene" uid="uid://cn6s7ncp3gbo" path="res://TSCN/PLAYER/playerController.tscn" id="3_a4ihj"]
-[ext_resource type="AudioStream" uid="uid://0kp6msvy0u6d" path="res://Sound effects/freesound_community-arcade-countdown-7007.mp3" id="4_exygr"]
-[ext_resource type="PackedScene" uid="uid://u6mpcoolgi1s" path="res://TSCN/OBJECTS/checkpoint.tscn" id="5_8juyp"]
-[ext_resource type="PackedScene" uid="uid://cbtd1o4r3j1lb" path="res://TSCN/OBJECTS/finnish_line.tscn" id="6_a4ihj"]
-[ext_resource type="PackedScene" uid="uid://cb0ostpad0001" path="res://TSCN/OBJECTS/boost_pad.tscn" id="7_exygr"]
-[ext_resource type="Material" uid="uid://81y6yfpxkh3e" path="res://MATERIALS/PurpleNeon.tres" id="8_exygr"]
-[ext_resource type="Material" uid="uid://dfm1267m0ohlk" path="res://MATERIALS/BLACK.tres" id="9_dy6af"]
-[ext_resource type="Material" uid="uid://yugsx68klmtg" path="res://MATERIALS/CityNeon.tres" id="10_joqm1"]
-[ext_resource type="Script" uid="uid://douiq0sg2lth0" path="res://TSCN/MAP/carspawn.gd" id="11_joqm1"]
-[ext_resource type="PackedScene" uid="uid://b3n36ifle6slg" path="res://TSCN/OBJECTS/car_1.tscn" id="12_8v0wu"]
-[ext_resource type="PackedScene" uid="uid://ws36b8x16tc6" path="res://TSCN/OBJECTS/car_2.tscn" id="13_h42o7"]
-[ext_resource type="PackedScene" uid="uid://chgyatj6p757u" path="res://TSCN/OBJECTS/Car_3.tscn" id="14_hxp28"]
+[ext_resource type="PackedScene" uid="uid://dgjd43pucuc52" path="res://TSCN/MAP/neon_city.tscn" id="1_8gqhj"]
+[ext_resource type="PackedScene" uid="uid://bb14apk6pbkte" path="res://TSCN/MAP/Skybox.tscn" id="2_rbad6"]
+[ext_resource type="PackedScene" uid="uid://cn6s7ncp3gbo" path="res://TSCN/PLAYER/playerController.tscn" id="3_mrr4i"]
+[ext_resource type="AudioStream" uid="uid://0kp6msvy0u6d" path="res://Sound effects/freesound_community-arcade-countdown-7007.mp3" id="4_deu88"]
+[ext_resource type="PackedScene" uid="uid://u6mpcoolgi1s" path="res://TSCN/OBJECTS/checkpoint.tscn" id="5_wgm4r"]
+[ext_resource type="PackedScene" uid="uid://cbtd1o4r3j1lb" path="res://TSCN/OBJECTS/finnish_line.tscn" id="6_c5bi4"]
+[ext_resource type="PackedScene" uid="uid://cb0ostpad0001" path="res://TSCN/OBJECTS/boost_pad.tscn" id="7_qy4bu"]
+[ext_resource type="Material" uid="uid://81y6yfpxkh3e" path="res://MATERIALS/PurpleNeon.tres" id="8_vwyxp"]
+[ext_resource type="Material" uid="uid://dfm1267m0ohlk" path="res://MATERIALS/BLACK.tres" id="9_urbmb"]
+[ext_resource type="Material" uid="uid://yugsx68klmtg" path="res://MATERIALS/CityNeon.tres" id="10_erpx1"]
+[ext_resource type="Script" uid="uid://douiq0sg2lth0" path="res://TSCN/MAP/carspawn.gd" id="11_ovwet"]
+[ext_resource type="PackedScene" uid="uid://b3n36ifle6slg" path="res://TSCN/OBJECTS/car_1.tscn" id="12_iib6l"]
+[ext_resource type="PackedScene" uid="uid://ws36b8x16tc6" path="res://TSCN/OBJECTS/car_2.tscn" id="13_5fjyr"]
+[ext_resource type="PackedScene" uid="uid://chgyatj6p757u" path="res://TSCN/OBJECTS/Car_3.tscn" id="14_pdutk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp0ol"]
 resource_name = "Material.001"
@@ -302,17 +302,17 @@ size = Vector3(1.9090909, 1.2109113, 0.8229542)
 
 [node name="Level 1" type="Node3D" unique_id=1519338197]
 
-[node name="neonCity" parent="." unique_id=1976190268 instance=ExtResource("1_oym7m")]
+[node name="neonCity" parent="." unique_id=1976190268 instance=ExtResource("1_8gqhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.62895, -0.021974564, 106.377174)
 
-[node name="Skybox" parent="." unique_id=788530130 instance=ExtResource("2_diyha")]
+[node name="Skybox" parent="." unique_id=788530130 instance=ExtResource("2_rbad6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3798733, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1739445436]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player1" parent="." unique_id=855619314 instance=ExtResource("3_a4ihj")]
+[node name="Player1" parent="." unique_id=855619314 instance=ExtResource("3_mrr4i")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.633482, 1.9826598, -10.758427)
 brake_speed = 20.0
 turn_speed = 1.4
@@ -320,122 +320,115 @@ min_turn_speed = 0.9
 drift_turn_multiplier = 2.0
 drift_boost_duration = 1.2
 
-[node name="Player2" parent="." unique_id=598120428 instance=ExtResource("3_a4ihj")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -8.69632, 1.9826598, -10.758427)
-player_id = 2
-brake_speed = 20.0
-turn_speed = 1.4
-min_turn_speed = 0.9
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1362003363]
-stream = ExtResource("4_exygr")
+stream = ExtResource("4_deu88")
 autoplay = true
 
 [node name="Checkpoints" type="Node" parent="." unique_id=1960739723]
 
-[node name="Checkpoint0" parent="Checkpoints" unique_id=1502376633 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint0" parent="Checkpoints" unique_id=1502376633 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, -7.1301, 1.4363871, 14.187611)
 
-[node name="Checkpoint12" parent="Checkpoints" unique_id=974858821 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint12" parent="Checkpoints" unique_id=974858821 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, 78.426636, 1.4363871, 14.187611)
 checkpoint_index = 12
 
-[node name="Checkpoint13" parent="Checkpoints" unique_id=1638334814 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint13" parent="Checkpoints" unique_id=1638334814 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(-6.556708e-08, 0, 1.5, 0, 3, 0, -1.5, 0, -6.556708e-08, 39.61696, 1.4363871, -19.032463)
 checkpoint_index = 13
 
-[node name="Checkpoint1" parent="Checkpoints" unique_id=1411533244 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint1" parent="Checkpoints" unique_id=1411533244 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, -7.1301, 5.789075, 82.03493)
 checkpoint_index = 1
 
-[node name="Checkpoint2" parent="Checkpoints" unique_id=97909891 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint2" parent="Checkpoints" unique_id=97909891 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(-6.457097e-08, -2.2771209e-08, 1.5, -0.26047227, 2.9544232, 0, -1.4772116, -0.52094454, -6.556708e-08, -28.612524, 9.947251, 105.89881)
 checkpoint_index = 2
 
-[node name="Checkpoint3" parent="Checkpoints" unique_id=1846544099 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint3" parent="Checkpoints" unique_id=1846544099 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(-0.8869477, -0.3127856, 1.199527, -0.26047227, 2.9544232, 0, -1.1813035, -0.41659135, -0.90063024, -61.24192, 14.703553, 132.06906)
 checkpoint_index = 3
 
-[node name="Checkpoint4" parent="Checkpoints" unique_id=686175200 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint4" parent="Checkpoints" unique_id=686175200 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.5, 1.3914015e-08, 5.9604645e-08, 1.4901161e-08, 2.9999998, -1.4901161e-08, 1.1920929e-07, 4.17316e-08, 1.5, -91.183464, 18.966862, 162.93593)
 checkpoint_index = 4
 
-[node name="Checkpoint5" parent="Checkpoints" unique_id=1346309038 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint5" parent="Checkpoints" unique_id=1346309038 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.5, 1.3914015e-08, 5.9604645e-08, 1.4901161e-08, 2.9999998, -1.4901161e-08, 1.1920929e-07, 4.17316e-08, 1.5, -91.183464, 18.966862, 208.62073)
 checkpoint_index = 5
 
-[node name="Checkpoint6" parent="Checkpoints" unique_id=1692767776 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint6" parent="Checkpoints" unique_id=1692767776 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 2.9999998, 0, 1.5, 0, -6.556708e-08, -55.45893, 18.966862, 233.72314)
 checkpoint_index = 6
 
-[node name="Checkpoint7" parent="Checkpoints" unique_id=1729667872 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint7" parent="Checkpoints" unique_id=1729667872 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 2.9999998, 0, 1.5, 0, -6.556708e-08, 5.725914, 18.966862, 233.72314)
 checkpoint_index = 7
 
-[node name="Checkpoint8" parent="Checkpoints" unique_id=1720343695 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint8" parent="Checkpoints" unique_id=1720343695 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.5, 0, 0, 0, 2.9999998, 0, 0, 0, 1.5, 39.469013, 18.966862, 204.6748)
 checkpoint_index = 8
 
-[node name="Checkpoint9" parent="Checkpoints" unique_id=1505188729 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint9" parent="Checkpoints" unique_id=1505188729 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.5, 0, 0, 0, 2.9999998, 0, 0, 0, 1.5, 25.602581, 18.966862, 166.44698)
 checkpoint_index = 9
 
-[node name="Checkpoint10" parent="Checkpoints" unique_id=445123716 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint10" parent="Checkpoints" unique_id=445123716 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.2639843, -0.19895543, -0.80152845, 0.11768865, 2.9907517, 0, 0.7990576, -0.1257744, 1.2678928, 32.233685, 16.544666, 142.65019)
 checkpoint_index = 10
 
-[node name="Checkpoint11" parent="Checkpoints" unique_id=450964363 instance=ExtResource("5_8juyp")]
+[node name="Checkpoint11" parent="Checkpoints" unique_id=450964363 instance=ExtResource("5_wgm4r")]
 transform = Transform3D(1.2639843, -0.19895543, -0.80152845, 0.11768865, 2.9907517, 0, 0.7990576, -0.1257744, 1.2678928, 74.15119, 9.828402, 103.272446)
 checkpoint_index = 11
 
-[node name="FinnishLine" parent="Checkpoints" unique_id=615543261 instance=ExtResource("6_a4ihj")]
+[node name="FinnishLine" parent="Checkpoints" unique_id=615543261 instance=ExtResource("6_c5bi4")]
 transform = Transform3D(1.2639854, -0.19895527, -0.801529, 0.117688574, 2.9907515, 4.1263895e-08, 0.7990583, -0.1257744, 1.2678941, 0.9040909, 1.6576233, -8.020325)
 
 [node name="Boosts" type="Node" parent="." unique_id=1247766947]
 
-[node name="BoostPad0" parent="Boosts" unique_id=1645289874 instance=ExtResource("7_exygr")]
+[node name="BoostPad0" parent="Boosts" unique_id=1645289874 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.964762, 0.3, 4)
 
-[node name="BoostPad5" parent="Boosts" unique_id=211987958 instance=ExtResource("7_exygr")]
+[node name="BoostPad5" parent="Boosts" unique_id=211987958 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 13.104309, 0.3, -18.800152)
 
-[node name="BoostPad6" parent="Boosts" unique_id=1845271791 instance=ExtResource("7_exygr")]
+[node name="BoostPad6" parent="Boosts" unique_id=1845271791 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 69.07275, 0.3, -11.324083)
 
-[node name="BoostPad7" parent="Boosts" unique_id=1995659209 instance=ExtResource("7_exygr")]
+[node name="BoostPad7" parent="Boosts" unique_id=1995659209 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 78.94192, 0.3, 35.524925)
 
-[node name="BoostPad8" parent="Boosts" unique_id=425255111 instance=ExtResource("7_exygr")]
+[node name="BoostPad8" parent="Boosts" unique_id=425255111 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -90.70257, 0.3, 35.524925)
 
-[node name="BoostPad1" parent="Boosts" unique_id=114463631 instance=ExtResource("7_exygr")]
+[node name="BoostPad1" parent="Boosts" unique_id=114463631 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.958326, 0.3, 4)
 
-[node name="BoostPad2" parent="Boosts" unique_id=1712297004 instance=ExtResource("7_exygr")]
+[node name="BoostPad2" parent="Boosts" unique_id=1712297004 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.640749, 0.3, 55.01784)
 
-[node name="BoostPad3" parent="Boosts" unique_id=1971439288 instance=ExtResource("7_exygr")]
+[node name="BoostPad3" parent="Boosts" unique_id=1971439288 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.0028019, 0.3, 55.01784)
 
-[node name="BoostPad4" parent="Boosts" unique_id=1263089247 instance=ExtResource("7_exygr")]
+[node name="BoostPad4" parent="Boosts" unique_id=1263089247 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7.049946, 9.0818615, 106.87245)
 
-[node name="BoostPad9" parent="Boosts" unique_id=93422524 instance=ExtResource("7_exygr")]
+[node name="BoostPad9" parent="Boosts" unique_id=93422524 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -39.657513, 9.0818615, 106.87245)
 
-[node name="BoostPad10" parent="Boosts" unique_id=2083810114 instance=ExtResource("7_exygr")]
+[node name="BoostPad10" parent="Boosts" unique_id=2083810114 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 72.66808, 9.0818615, 106.87245)
 
-[node name="BoostPad11" parent="Boosts" unique_id=1301518034 instance=ExtResource("7_exygr")]
+[node name="BoostPad11" parent="Boosts" unique_id=1301518034 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30.45763, 20.328712, 182.6747)
 
-[node name="BoostPad12" parent="Boosts" unique_id=1230457151 instance=ExtResource("7_exygr")]
+[node name="BoostPad12" parent="Boosts" unique_id=1230457151 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -89.19411, 20.328712, 182.6747)
 
-[node name="BoostPad13" parent="Boosts" unique_id=1949626316 instance=ExtResource("7_exygr")]
+[node name="BoostPad13" parent="Boosts" unique_id=1949626316 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -89.19411, 20.328712, 233.2903)
 
-[node name="BoostPad14" parent="Boosts" unique_id=47076750 instance=ExtResource("7_exygr")]
+[node name="BoostPad14" parent="Boosts" unique_id=47076750 instance=ExtResource("7_qy4bu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 47.576035, 20.328712, 233.2903)
 
 [node name="Decor" type="Node" parent="." unique_id=1023628413]
@@ -445,7 +438,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 47.576035, 20.328712, 233.290
 [node name="Streetlamp" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1369413077]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -0.55414057, 0.00080156326, -0.5659785)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp" unique_id=14274180]
 
@@ -464,7 +457,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp19" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1938837132]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 36.14887, 0.00080156326, -24.442595)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp19" unique_id=569619807]
 
@@ -483,7 +476,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp20" type="MeshInstance3D" parent="Decor/Streelights" unique_id=476953717]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 115.85518, 0.00080156326, -24.442595)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp20" unique_id=278922837]
 
@@ -502,7 +495,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp21" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1205661120]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -46.607147, 0.00080156326, -24.442595)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp21" unique_id=1612873726]
 
@@ -521,7 +514,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp22" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1346746971]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -134.46489, 0.00080156326, -24.442595)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp22" unique_id=177626109]
 
@@ -540,7 +533,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp23" type="MeshInstance3D" parent="Decor/Streelights" unique_id=817033254]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 36.14887, 0.00080156326, 24.850023)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp23" unique_id=1206111397]
 
@@ -559,7 +552,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp24" type="MeshInstance3D" parent="Decor/Streelights" unique_id=118165719]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 115.85518, 0.00080156326, 24.850023)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp24" unique_id=651746574]
 
@@ -578,7 +571,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp25" type="MeshInstance3D" parent="Decor/Streelights" unique_id=368082824]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -46.607147, 0.00080156326, 24.850023)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp25" unique_id=378398804]
 
@@ -597,7 +590,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp26" type="MeshInstance3D" parent="Decor/Streelights" unique_id=344978227]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -134.46489, 0.00080156326, 24.850023)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp26" unique_id=1130676129]
 
@@ -616,7 +609,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp27" type="MeshInstance3D" parent="Decor/Streelights" unique_id=896344812]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 36.14887, 18.659592, 177.13913)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp27" unique_id=1176328550]
 
@@ -635,7 +628,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp28" type="MeshInstance3D" parent="Decor/Streelights" unique_id=389883420]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 115.85518, 18.659592, 177.13913)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp28" unique_id=1315043290]
 
@@ -654,7 +647,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp29" type="MeshInstance3D" parent="Decor/Streelights" unique_id=273619802]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -46.607147, 18.659592, 177.13913)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp29" unique_id=1937455773]
 
@@ -673,7 +666,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp30" type="MeshInstance3D" parent="Decor/Streelights" unique_id=2085907856]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -134.46489, 18.659592, 177.13913)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp30" unique_id=477853137]
 
@@ -692,7 +685,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp31" type="MeshInstance3D" parent="Decor/Streelights" unique_id=480111890]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 36.14887, 18.659592, 227.38539)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp31" unique_id=417164118]
 
@@ -711,7 +704,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp32" type="MeshInstance3D" parent="Decor/Streelights" unique_id=910125016]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, 115.85518, 18.659592, 227.38539)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp32" unique_id=1612462823]
 
@@ -730,7 +723,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp33" type="MeshInstance3D" parent="Decor/Streelights" unique_id=62506835]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -46.607147, 18.659592, 227.38539)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp33" unique_id=1324809589]
 
@@ -749,7 +742,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp34" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1119185392]
 transform = Transform3D(0.7291456, 0, 0, 0, 0.18035015, 0, 0, 0, 0.7291456, -134.46489, 18.659592, 227.38539)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp34" unique_id=1213999816]
 
@@ -768,7 +761,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp2" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1400028215]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -0.55414057, 0.00080156326, 26.380604)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp2" unique_id=1438933812]
 
@@ -787,7 +780,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp3" type="MeshInstance3D" parent="Decor/Streelights" unique_id=625283080]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -0.55414057, 0.00080156326, 56.817055)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp3" unique_id=1510533686]
 
@@ -806,7 +799,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp4" type="MeshInstance3D" parent="Decor/Streelights" unique_id=661796021]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -0.55414057, 11.653784, 120.7235)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp4" unique_id=1252070180]
 
@@ -825,7 +818,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp5" type="MeshInstance3D" parent="Decor/Streelights" unique_id=30067206]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -0.55414057, 17.512587, 172.07303)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp5" unique_id=1758922309]
 
@@ -844,7 +837,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp6" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1002627536]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -0.55414057, 17.512587, 223.41113)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp6" unique_id=558831094]
 
@@ -863,7 +856,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp7" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1138540470]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, 82.65608, 0.00080156326, -0.5659785)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp7" unique_id=1574749111]
 
@@ -882,7 +875,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp8" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1195026087]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, 82.65608, 0.00080156326, 26.380604)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp8" unique_id=792063196]
 
@@ -901,7 +894,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp9" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1171154124]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, 82.65608, 0.00080156326, 56.817055)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp9" unique_id=264898197]
 
@@ -920,7 +913,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp10" type="MeshInstance3D" parent="Decor/Streelights" unique_id=2009236573]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, 82.65608, 11.653784, 120.7235)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp10" unique_id=313490170]
 
@@ -939,7 +932,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp11" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1238641980]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, 82.65608, 17.512587, 172.07303)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp11" unique_id=1254008040]
 
@@ -958,7 +951,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp12" type="MeshInstance3D" parent="Decor/Streelights" unique_id=961992237]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, 82.65608, 17.512587, 223.41113)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp12" unique_id=1141875790]
 
@@ -977,7 +970,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp13" type="MeshInstance3D" parent="Decor/Streelights" unique_id=958543393]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -85.74556, 0.00080156326, -0.5659785)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp13" unique_id=1556475233]
 
@@ -996,7 +989,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp14" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1652006645]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -85.74556, 0.00080156326, 26.380604)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp14" unique_id=1024733553]
 
@@ -1015,7 +1008,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp15" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1982617739]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -85.74556, 0.00080156326, 56.817055)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp15" unique_id=1155090505]
 
@@ -1034,7 +1027,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp16" type="MeshInstance3D" parent="Decor/Streelights" unique_id=549402925]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -85.74556, 11.653784, 120.7235)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp16" unique_id=2002690517]
 
@@ -1053,7 +1046,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp17" type="MeshInstance3D" parent="Decor/Streelights" unique_id=1029589631]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -85.74556, 17.512587, 172.07303)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp17" unique_id=1419434680]
 
@@ -1072,7 +1065,7 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Streetlamp18" type="MeshInstance3D" parent="Decor/Streelights" unique_id=2044739820]
 transform = Transform3D(-3.1871966e-08, 0, -0.7291456, 0, 0.18035015, 0, 0.7291456, 0, -3.1871966e-08, -85.74556, 17.512587, 223.41113)
 mesh = SubResource("ArrayMesh_8juyp")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Streelights/Streetlamp18" unique_id=160885421]
 
@@ -1091,26 +1084,26 @@ shape = SubResource("ConvexPolygonShape3D_y6tqf")
 [node name="Stop Light" type="MeshInstance3D" parent="Decor" unique_id=797903874]
 transform = Transform3D(0.34373385, 0, 0, 0, 0.34373385, 0, 0, 0, 0.34373385, 78.65084, 6.001067, -19.151934)
 mesh = SubResource("ArrayMesh_80fdd")
-surface_material_override/0 = ExtResource("9_dy6af")
-surface_material_override/1 = ExtResource("10_joqm1")
+surface_material_override/0 = ExtResource("9_urbmb")
+surface_material_override/1 = ExtResource("10_erpx1")
 
 [node name="Stop Light2" type="MeshInstance3D" parent="Decor" unique_id=686079200]
 transform = Transform3D(0.34373385, 0, 0, 0, 0.34373385, 0, 0, 0, 0.34373385, -90.824036, 6.001067, -19.151934)
 mesh = SubResource("ArrayMesh_80fdd")
-surface_material_override/0 = ExtResource("9_dy6af")
-surface_material_override/1 = ExtResource("10_joqm1")
+surface_material_override/0 = ExtResource("9_urbmb")
+surface_material_override/1 = ExtResource("10_erpx1")
 
 [node name="Stop Light3" type="MeshInstance3D" parent="Decor" unique_id=1113449319]
 transform = Transform3D(0.34373385, 0, 0, 0, 0.34373385, 0, 0, 0, 0.34373385, 78.65084, 24.134855, 182.7011)
 mesh = SubResource("ArrayMesh_80fdd")
-surface_material_override/0 = ExtResource("9_dy6af")
-surface_material_override/1 = ExtResource("10_joqm1")
+surface_material_override/0 = ExtResource("9_urbmb")
+surface_material_override/1 = ExtResource("10_erpx1")
 
 [node name="Stop Light4" type="MeshInstance3D" parent="Decor" unique_id=1949242893]
 transform = Transform3D(0.34373385, 0, 0, 0, 0.34373385, 0, 0, 0, 0.34373385, -90.824036, 24.134855, 182.7011)
 mesh = SubResource("ArrayMesh_80fdd")
-surface_material_override/0 = ExtResource("9_dy6af")
-surface_material_override/1 = ExtResource("10_joqm1")
+surface_material_override/0 = ExtResource("9_urbmb")
+surface_material_override/1 = ExtResource("10_erpx1")
 
 [node name="Bench" type="MeshInstance3D" parent="Decor" unique_id=1108465489]
 transform = Transform3D(-0.41248074, 0, -3.6060232e-08, 0, 0.27429965, 0, 3.6060232e-08, 0, -0.41248074, -83.72264, 17.724442, 187.67188)
@@ -1147,65 +1140,65 @@ mesh = SubResource("ArrayMesh_dy6af")
 [node name="Arrow" type="MeshInstance3D" parent="Decor" unique_id=64183699]
 transform = Transform3D(-2.5, -3.774895e-07, 1.650059e-14, 0, -1.09278474e-07, -2.5, 3.774895e-07, -2.5, 1.09278474e-07, -4.6570797, 12.258265, 104.05526)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow6" type="MeshInstance3D" parent="Decor" unique_id=392268105]
 transform = Transform3D(2.5, 0, 0, 0, -1.09278474e-07, -2.5, 0, 2.5, -1.09278474e-07, 37.972, 12.258265, 109.25699)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow7" type="MeshInstance3D" parent="Decor" unique_id=1529546242]
 transform = Transform3D(2.5, 0, 0, 0, -1.09278474e-07, -2.5, 0, 2.5, -1.09278474e-07, 45.33805, 12.258265, 109.25699)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow8" type="MeshInstance3D" parent="Decor" unique_id=724944425]
 transform = Transform3D(2.5, 0, 0, 0, -1.09278474e-07, -2.5, 0, 2.5, -1.09278474e-07, 31.011677, 12.258265, 109.25699)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow2" type="MeshInstance3D" parent="Decor" unique_id=1931353111]
 transform = Transform3D(2.5, 0, 0, 0, 2.9812202e-08, 2.5, 0, -2.5, 2.9812202e-08, -95.05703, 27.300585, 225.47287)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow3" type="MeshInstance3D" parent="Decor" unique_id=295453920]
 transform = Transform3D(-1.09278474e-07, -2.5, -1.09278474e-07, 0, -1.09278474e-07, 2.5, -2.5, 1.09278474e-07, 4.7767136e-15, 42.538662, 22.242796, 236.88062)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow4" type="MeshInstance3D" parent="Decor" unique_id=2011895797]
 transform = Transform3D(-1.09278474e-07, -2.5, -1.09278474e-07, 0, -1.09278474e-07, 2.5, -2.5, 1.09278474e-07, 4.7767136e-15, 42.538662, 22.242796, 228.94513)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow5" type="MeshInstance3D" parent="Decor" unique_id=1942466392]
 transform = Transform3D(-2.5, 2.1855695e-07, 9.553427e-15, 0, -1.09278474e-07, 2.5, 2.1855695e-07, 2.5, 1.09278474e-07, 81.12025, 5.9383183, -7.133531)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow9" type="MeshInstance3D" parent="Decor" unique_id=1895311486]
 transform = Transform3D(-1.09278474e-07, 2.5, 1.09278474e-07, 0, -1.09278474e-07, 2.5, 2.5, 1.09278474e-07, 4.7767136e-15, 0.57167053, 7.934433, -22.929806)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow11" type="MeshInstance3D" parent="Decor" unique_id=1292271610]
 transform = Transform3D(-1.09278474e-07, 2.5, 1.09278474e-07, 0, -1.09278474e-07, 2.5, 2.5, 1.09278474e-07, 4.7767136e-15, -98.33734, 23.198177, 143.96823)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Arrow10" type="MeshInstance3D" parent="Decor" unique_id=1740328281]
 transform = Transform3D(-1.09278474e-07, 2.5, 1.09278474e-07, 0, -1.09278474e-07, 2.5, 2.5, 1.09278474e-07, 4.7767136e-15, 0.57167053, 7.3124886, -30.519917)
 mesh = SubResource("ArrayMesh_joqm1")
-surface_material_override/0 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("8_vwyxp")
 
 [node name="Barricades" type="Node" parent="Decor" unique_id=1629399263]
 
 [node name="Barricade" type="MeshInstance3D" parent="Decor/Barricades" unique_id=904448908]
 transform = Transform3D(2.3148737, 0, 1.2721565, 0, 2.5, 0, -1.9082347, 0, 1.5432491, -6.412621, 2.9006317, -28.531872)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade" unique_id=292414519]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1217,8 +1210,8 @@ shape = SubResource("BoxShape3D_dy6af")
 [node name="Barricade2" type="MeshInstance3D" parent="Decor/Barricades" unique_id=668739033]
 transform = Transform3D(1.3056933, 0, 1.8006376, 0, 2.5, 0, -2.7009563, 0, 0.8704622, -11.018529, 2.9006317, -22.994877)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade2" unique_id=692985558]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1230,8 +1223,8 @@ shape = SubResource("BoxShape3D_joqm1")
 [node name="Barricade3" type="MeshInstance3D" parent="Decor/Barricades" unique_id=438502113]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, -12.272642, 2.9006317, -16.56756)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade3" unique_id=2082385592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1243,8 +1236,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade4" type="MeshInstance3D" parent="Decor/Barricades" unique_id=2024455682]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 8.99231, 2.9006317, 29.632002)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade4" unique_id=934684172]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1260,8 +1253,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade5" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1562153236]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 8.99231, 2.9006317, 36.876442)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade5" unique_id=1703487144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1273,8 +1266,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade11" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1774095741]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 8.99231, 2.9006317, 36.876442)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade11" unique_id=1690590046]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1286,8 +1279,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade22" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1283634268]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 60.110054, 2.9006317, 36.876442)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade22" unique_id=1757766169]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1299,8 +1292,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade23" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1089122870]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 60.110054, 2.9006317, 29.440071)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade23" unique_id=916141637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1312,8 +1305,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade24" type="MeshInstance3D" parent="Decor/Barricades" unique_id=656099079]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 94.20884, 2.9006317, 29.440071)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade24" unique_id=581738893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1325,8 +1318,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade25" type="MeshInstance3D" parent="Decor/Barricades" unique_id=675429045]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 94.20884, 2.9006317, 37.542572)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade25" unique_id=10770393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1338,8 +1331,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade6" type="MeshInstance3D" parent="Decor/Barricades" unique_id=2034258025]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, -28.553932, 2.9006317, 41.92122)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade6" unique_id=1798340071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1351,8 +1344,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade7" type="MeshInstance3D" parent="Decor/Barricades" unique_id=794551616]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, -28.553932, 2.9006317, 33.9053)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade7" unique_id=1152074414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1364,8 +1357,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade8" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1972026307]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, -28.553932, 2.9006317, 26.4995)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade8" unique_id=60410020]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1377,8 +1370,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade9" type="MeshInstance3D" parent="Decor/Barricades" unique_id=738198729]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, -28.553932, 2.9006317, 18.61642)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade9" unique_id=1317743265]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1390,8 +1383,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade10" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1218923753]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, -28.553932, 2.9006317, 11.601009)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade10" unique_id=851577378]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1403,8 +1396,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade12" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1180092381]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 53.920433, 20.38996, 230.71407)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade12" unique_id=1645760227]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1416,8 +1409,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade15" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1435901444]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 53.920433, 20.38996, 200.4587)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade15" unique_id=353579434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1429,8 +1422,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade16" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1229682075]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 53.920433, 20.38996, 192.34569)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade16" unique_id=1807113622]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1442,8 +1435,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade17" type="MeshInstance3D" parent="Decor/Barricades" unique_id=426675400]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 53.920433, 20.38996, 183.02576)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade17" unique_id=2026346104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1455,8 +1448,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade18" type="MeshInstance3D" parent="Decor/Barricades" unique_id=682290702]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 4.976528, 20.38996, 183.02576)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade18" unique_id=981946697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1468,8 +1461,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade19" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1203827035]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 4.976528, 20.38996, 172.42526)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade19" unique_id=683878287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1481,8 +1474,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade20" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1927057240]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 4.976528, 20.38996, 163.55693)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade20" unique_id=2123636352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1494,8 +1487,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade21" type="MeshInstance3D" parent="Decor/Barricades" unique_id=574116183]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 4.976528, 19.127651, 153.66531)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade21" unique_id=1457185455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1507,8 +1500,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade13" type="MeshInstance3D" parent="Decor/Barricades" unique_id=805558755]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 53.920433, 20.38996, 237.15692)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade13" unique_id=1482852708]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1520,8 +1513,8 @@ shape = SubResource("BoxShape3D_80fdd")
 [node name="Barricade14" type="MeshInstance3D" parent="Decor/Barricades" unique_id=1442523354]
 transform = Transform3D(-1.3113416e-07, 0, 2, 0, 2.5, 0, -3, 0, -8.742278e-08, 53.920433, 20.38996, 243.48694)
 mesh = SubResource("ArrayMesh_y6tqf")
-surface_material_override/0 = ExtResource("10_joqm1")
-surface_material_override/1 = ExtResource("8_exygr")
+surface_material_override/0 = ExtResource("10_erpx1")
+surface_material_override/1 = ExtResource("8_vwyxp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Barricades/Barricade14" unique_id=510635374]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
@@ -1532,84 +1525,80 @@ shape = SubResource("BoxShape3D_80fdd")
 
 [node name="CarSpawn1" type="Node3D" parent="." unique_id=1499397144]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -160.03026, 18.467957, 235.7058)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 speed = 15.0
 
 [node name="CarSpawn2" type="Node3D" parent="." unique_id=1457211851]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -160.03026, 0.8481827, 36.113007)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 speed = 15.0
 
 [node name="CarSpawn3" type="Node3D" parent="." unique_id=1576382128]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 148.78793, 18.467957, 231.91284)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 speed = 15.0
 
 [node name="CarSpawn4" type="Node3D" parent="." unique_id=36810828]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 0.8481827, 32.69562)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 speed = 15.0
 
 [node name="CarSpawn5" type="Node3D" parent="." unique_id=836727861]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 30.738358, -16.349499)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
 
 [node name="CarSpawn8" type="Node3D" parent="." unique_id=993604445]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 30.738358, -16.349499)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
 
 [node name="CarSpawn9" type="Node3D" parent="." unique_id=1204031445]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 41.220352, 107.37999)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
 
 [node name="CarSpawn10" type="Node3D" parent="." unique_id=466947654]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 57.352882, 180.73843)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
 
 [node name="CarSpawn11" type="Node3D" parent="." unique_id=1293180635]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 65.48219, 234.68861)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
 
 [node name="CarSpawn12" type="Node3D" parent="." unique_id=1369193598]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 65.48219, -15.940689)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
 
 [node name="CarSpawn6" type="Node3D" parent="." unique_id=1409792708]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 37.02336, 104.48929)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
 
 [node name="CarSpawn7" type="Node3D" parent="." unique_id=1658842781]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 49.330177, 181.49327)
-script = ExtResource("11_joqm1")
-car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+script = ExtResource("11_ovwet")
+car_scenes = Array[PackedScene]([ExtResource("12_iib6l"), ExtResource("13_5fjyr"), ExtResource("14_pdutk")])
 spawn_interval = 4.0
 speed = 15.0
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1145313656]
-stream = ExtResource("4_exygr")
-autoplay = true

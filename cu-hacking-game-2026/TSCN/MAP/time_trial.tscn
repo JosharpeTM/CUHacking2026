@@ -1,18 +1,16 @@
 [gd_scene format=3 uid="uid://c1tmtrialscn0"]
 
-[ext_resource type="Script" path="res://SCRIPTS/MAP/time_trial.gd" id="1_ttscr"]
-[ext_resource type="PackedScene" uid="uid://bs4mdhfa75c8x" path="res://TSCN/MAP/testmap.tscn" id="2_track"]
-[ext_resource type="PackedScene" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
-[ext_resource type="Script" path="res://SCRIPTS/UI/countdown_overlay.gd" id="4_countdown"]
+[ext_resource type="Script" uid="uid://8kmhje18h4fk" path="res://SCRIPTS/MAP/time_trial.gd" id="1_ttscr"]
+[ext_resource type="PackedScene" uid="uid://ipcosxsqiv8j" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" uid="uid://cm3ygj6au4sfo" path="res://TSCN/MAP/level_1Time.tscn" id="4_51enr"]
+[ext_resource type="Script" uid="uid://d2ca1d6ijhcmf" path="res://SCRIPTS/UI/countdown_overlay.gd" id="4_countdown"]
 
-[node name="TimeTrial" type="Node"]
+[node name="TimeTrial" type="Node" unique_id=467224296]
 script = ExtResource("1_ttscr")
 
-[node name="Track" parent="." instance=ExtResource("2_track")]
+[node name="HUD" parent="." unique_id=2029198865 instance=ExtResource("3_hud")]
 
-[node name="HUD" parent="." instance=ExtResource("3_hud")]
-
-[node name="SharedHUD" type="Control" parent="."]
+[node name="SharedHUD" type="Control" parent="." unique_id=1333354828]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TimerLabel" type="Label" parent="SharedHUD"]
+[node name="TimerLabel" type="Label" parent="SharedHUD" unique_id=23830930]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -38,7 +36,7 @@ text = "00:00.000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CountdownLabel" type="Label" parent="SharedHUD"]
+[node name="CountdownLabel" type="Label" parent="SharedHUD" unique_id=1091341924]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -51,12 +49,13 @@ offset_right = 200.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.08, 0.0, 0.16, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0, 0.16, 1)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 180
 text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_countdown")
+
+[node name="Track" parent="." unique_id=1519338197 instance=ExtResource("4_51enr")]

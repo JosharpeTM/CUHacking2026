@@ -40,14 +40,27 @@ func _ready() -> void:
 	RaceManager.lap_completed.connect(_on_lap_completed)
 
 	# Find the skater this HUD belongs to so we can mirror its boost tank.
-	# Groups are tracked tree-wide, so this resolves even across SubViewports.
+	_resolve_player()
+
+
+## Locate this HUD's skater by player_id from the tree-wide "Player" group.
+## Groups resolve even across SubViewports. This can miss on the first try if the
+## HUD readies before the skater has added itself to the group (scene-order
+## dependent — e.g. time trial lists the HUD before the track), so _process()
+## retries until it resolves.
+func _resolve_player() -> void:
 	for p in get_tree().get_nodes_in_group("Player"):
 		if p.player_id == player_id:
 			_player = p
-			break
+			return
 
 
 func _process(delta: float) -> void:
+	# Keep trying to bind the skater until it exists in the group — it may ready
+	# after this HUD depending on scene node order.
+	if not is_instance_valid(_player):
+		_resolve_player()
+
 	if _split_time_left > 0.0:
 		_split_time_left -= delta
 		if _split_time_left <= 0.0:
