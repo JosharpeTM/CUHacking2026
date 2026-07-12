@@ -123,5 +123,5 @@ transform = Transform3D(-7.86805e-08, 0, -1.8, 0, 1.8, 0, 1.8, 0, -7.86805e-08, 
 
 [node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="." unique_id=731247339]
 stream = ExtResource("9_wotdl")
-volume_db = 9.69
+volume_db = 24.0
 pitch_scale = 2.37
