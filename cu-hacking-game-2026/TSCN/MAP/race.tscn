@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blnwstyisbrmn" path="res://TSCN/MAP/level_1.tscn" id="2_6s6dp"]
 [ext_resource type="PackedScene" uid="uid://ipcosxsqiv8j" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
 [ext_resource type="Script" uid="uid://d2ca1d6ijhcmf" path="res://SCRIPTS/UI/countdown_overlay.gd" id="4_countdown"]
+[ext_resource type="PackedScene" uid="uid://cpausemenu00001" path="res://TSCN/UI/pause_menu.tscn" id="5_pause"]
 
 [sub_resource type="StyleBoxFlat" id="divider_glow"]
 bg_color = Color(0.85, 0.5, 1, 1)
@@ -105,3 +106,5 @@ text = "3"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_countdown")
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_pause")]

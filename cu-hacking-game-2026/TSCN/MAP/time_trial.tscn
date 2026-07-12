@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ipcosxsqiv8j" path="res://TSCN/UI/race_hud.tscn" id="3_hud"]
 [ext_resource type="PackedScene" uid="uid://cm3ygj6au4sfo" path="res://TSCN/MAP/level_1Time.tscn" id="4_51enr"]
 [ext_resource type="Script" uid="uid://d2ca1d6ijhcmf" path="res://SCRIPTS/UI/countdown_overlay.gd" id="4_countdown"]
+[ext_resource type="PackedScene" uid="uid://cpausemenu00001" path="res://TSCN/UI/pause_menu.tscn" id="5_pause"]
 
 [node name="TimeTrial" type="Node" unique_id=467224296]
 script = ExtResource("1_ttscr")
@@ -59,3 +60,5 @@ vertical_alignment = 1
 script = ExtResource("4_countdown")
 
 [node name="Track" parent="." unique_id=1519338197 instance=ExtResource("4_51enr")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_pause")]
