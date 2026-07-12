@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://bb3xxcljidmxy"]
 
-[ext_resource type="Script" path="res://SCRIPTS/UI/splash.gd" id="1_splash"]
+[ext_resource type="Script" uid="uid://bubd5hbo08kp4" path="res://SCRIPTS/UI/splash.gd" id="1_splash"]
 [ext_resource type="Texture2D" uid="uid://bh72d0xemh8m7" path="res://canal_lite_splash_woodsy.png" id="2_splashtex"]
+[ext_resource type="VideoStream" uid="uid://wsncuhma4umv" path="res://cuhackingvideosplash.ogv" id="3_34nk1"]
 
-[node name="Splash" type="Control"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jt5ks"]
+load_path = "res://.godot/imported/canalwoodssplash.png-11c1493d6808e54d23f1abe17656185b.ctex"
+
+[node name="SplashScreen" type="Control" unique_id=1476577595]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_splash")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1053816728]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Logo1" type="TextureRect" parent="." unique_id=578316055]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,3 +35,27 @@ grow_vertical = 2
 texture = ExtResource("2_splashtex")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="Logo2" type="TextureRect" parent="." unique_id=2083763769]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -452.0
+offset_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_jt5ks")
+expand_mode = 5
+stretch_mode = 3
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=2073670058]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 335.0
+offset_right = 1780.0
+offset_bottom = 1055.0
+scale = Vector2(0.75, 0.75)
+stream = ExtResource("3_34nk1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1763931730]
