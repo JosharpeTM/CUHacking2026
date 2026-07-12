@@ -10,6 +10,10 @@
 [ext_resource type="Material" uid="uid://81y6yfpxkh3e" path="res://MATERIALS/PurpleNeon.tres" id="8_exygr"]
 [ext_resource type="Material" uid="uid://dfm1267m0ohlk" path="res://MATERIALS/BLACK.tres" id="9_dy6af"]
 [ext_resource type="Material" uid="uid://yugsx68klmtg" path="res://MATERIALS/CityNeon.tres" id="10_joqm1"]
+[ext_resource type="Script" uid="uid://douiq0sg2lth0" path="res://TSCN/MAP/carspawn.gd" id="11_joqm1"]
+[ext_resource type="PackedScene" uid="uid://b3n36ifle6slg" path="res://TSCN/OBJECTS/car_1.tscn" id="12_8v0wu"]
+[ext_resource type="PackedScene" uid="uid://ws36b8x16tc6" path="res://TSCN/OBJECTS/car_2.tscn" id="13_h42o7"]
+[ext_resource type="PackedScene" uid="uid://chgyatj6p757u" path="res://TSCN/OBJECTS/Car_3.tscn" id="14_hxp28"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pp0ol"]
 resource_name = "Material.001"
@@ -1523,3 +1527,83 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04545456, -0.53122246, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Barricades/Barricade14/StaticBody3D" unique_id=1451527237]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_80fdd")
+
+[node name="CarSpawn1" type="Node3D" parent="." unique_id=1499397144]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -160.03026, 18.467957, 235.7058)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+speed = 15.0
+
+[node name="CarSpawn2" type="Node3D" parent="." unique_id=1457211851]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -160.03026, 0.8481827, 36.113007)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+speed = 15.0
+
+[node name="CarSpawn3" type="Node3D" parent="." unique_id=1576382128]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 148.78793, 18.467957, 231.91284)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+speed = 15.0
+
+[node name="CarSpawn4" type="Node3D" parent="." unique_id=36810828]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 0.8481827, 32.69562)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+speed = 15.0
+
+[node name="CarSpawn5" type="Node3D" parent="." unique_id=836727861]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 30.738358, -16.349499)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
+
+[node name="CarSpawn8" type="Node3D" parent="." unique_id=993604445]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 30.738358, -16.349499)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
+
+[node name="CarSpawn9" type="Node3D" parent="." unique_id=1204031445]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 41.220352, 107.37999)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
+
+[node name="CarSpawn10" type="Node3D" parent="." unique_id=466947654]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 57.352882, 180.73843)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
+
+[node name="CarSpawn11" type="Node3D" parent="." unique_id=1293180635]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 65.48219, 234.68861)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
+
+[node name="CarSpawn12" type="Node3D" parent="." unique_id=1369193598]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -169.65207, 65.48219, -15.940689)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
+
+[node name="CarSpawn6" type="Node3D" parent="." unique_id=1409792708]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 37.02336, 104.48929)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
+
+[node name="CarSpawn7" type="Node3D" parent="." unique_id=1658842781]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 139.3212, 49.330177, 181.49327)
+script = ExtResource("11_joqm1")
+car_scenes = Array[PackedScene]([ExtResource("12_8v0wu"), ExtResource("13_h42o7"), ExtResource("14_hxp28")])
+spawn_interval = 4.0
+speed = 15.0
