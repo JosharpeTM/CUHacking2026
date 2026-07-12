@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://clo2gb03w3a3y"]
+
+[ext_resource type="Script" path="res://SCRIPTS/MAP/practice.gd" id="1_prscr"]
+[ext_resource type="PackedScene" uid="uid://ipcosxsqiv8j" path="res://TSCN/UI/race_hud.tscn" id="2_hud"]
+[ext_resource type="PackedScene" uid="uid://bs4mdhfa75c8x" path="res://TSCN/MAP/testmap.tscn" id="3_track"]
+[ext_resource type="PackedScene" uid="uid://bgy2y6nyqe3ts" path="res://TSCN/UI/pause_menu.tscn" id="4_pause"]
+
+[sub_resource type="StyleBoxFlat" id="controls_bg"]
+bg_color = Color(0.05, 0.02, 0.1, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.25, 1, 0.7)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Practice" type="Node"]
+script = ExtResource("1_prscr")
+
+[node name="HUD" parent="." instance=ExtResource("2_hud")]
+
+[node name="ControlsHUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="ControlsHUD"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 356.0
+offset_bottom = 336.0
+theme_override_styles/panel = SubResource("controls_bg")
+
+[node name="Margin" type="MarginContainer" parent="ControlsHUD/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="ControlsHUD/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="ControlsHUD/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.15, 1, 0.6)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "CONTROLS"
+
+[node name="Grid" type="GridContainer" parent="ControlsHUD/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="A0" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Accelerate"
+
+[node name="B0" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Right Trigger"
+
+[node name="A1" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Brake / Reverse"
+
+[node name="B1" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Left Trigger"
+
+[node name="A2" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Steer"
+
+[node name="B2" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Left Stick"
+
+[node name="A3" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Look Around"
+
+[node name="B3" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Right Stick"
+
+[node name="A4" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Jump"
+
+[node name="B4" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "A  /  Cross"
+
+[node name="A5" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Boost  (hold)"
+
+[node name="B5" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "B  /  Circle"
+
+[node name="A6" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Drift  (hold + steer)"
+
+[node name="B6" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "R1  /  RB"
+
+[node name="A7" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Respawn"
+
+[node name="B7" type="Label" parent="ControlsHUD/Panel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Y  /  Triangle"
+
+[node name="Hint" type="Label" parent="ControlsHUD/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 1, 0.75)
+theme_override_font_sizes/font_size = 16
+text = "Press Menu to exit"
+
+[node name="Track" parent="." instance=ExtResource("3_track")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_pause")]

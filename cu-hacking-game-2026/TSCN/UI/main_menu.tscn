@@ -100,6 +100,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "TIME TRIAL"
 
+[node name="PracticeButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons" unique_id=155003487]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "PRACTICE"
+
 [node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons" unique_id=155003486]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32

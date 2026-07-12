@@ -31,6 +31,7 @@ const COUNTDOWN_SECONDS := 3
 const MENU_SCENE := "res://TSCN/UI/main_menu.tscn"
 const RACE_SCENE := "res://TSCN/MAP/race.tscn"
 const TIME_TRIAL_SCENE := "res://TSCN/MAP/time_trial.tscn"
+const PRACTICE_SCENE := "res://TSCN/MAP/practice.tscn"
 const RESULTS_SCENE := "res://TSCN/UI/results.tscn"
 # The heavy shared geometry both race modes embed (a 21 MB GLB city). Warmed up
 # on the menu so its shaders don't compile on the first race frame.
@@ -91,7 +92,7 @@ func _grab_window_focus() -> void:
 ## Kick off background loads for the playable scenes. Safe to call repeatedly —
 ## a path already loading or loaded is skipped.
 func preload_race_scenes() -> void:
-	for path in [RACE_SCENE, TIME_TRIAL_SCENE]:
+	for path in [RACE_SCENE, TIME_TRIAL_SCENE, PRACTICE_SCENE]:
 		if ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
 			ResourceLoader.load_threaded_request(path)
 
@@ -191,6 +192,22 @@ func _aim_camera_at(cam: Camera3D, bounds: AABB) -> void:
 	cam.far = maxf(radius * 5.0, 100.0)
 	cam.global_position = center + Vector3(radius, radius, radius)
 	cam.look_at(center, Vector3.UP)
+
+
+## Free-drive practice mode: no countdown, no timer, no checkpoints. Just a
+## single skater cruising the map. We clear the race bookkeeping and mark the
+## world live with input already unlocked, so the skater drives the instant the
+## scene loads (and Triangle/Y respawn still works — it only checks race_active).
+## There are no players in the timing dict and no finish line, so none of the
+## race/lap/results machinery ever fires.
+func start_practice() -> void:
+	is_time_trial = false
+	is_new_record = false
+	previous_best = 0.0
+	players = {}
+	race_elapsed = 0.0
+	race_active = true
+	input_locked = false
 
 
 ## Reset all race state and start the clocks. Called by the race scene

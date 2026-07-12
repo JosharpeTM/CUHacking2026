@@ -15,6 +15,7 @@ extends Control
 @onready var title: Label = $CenterContainer/VBoxContainer/Title
 @onready var race_button: Button = $CenterContainer/VBoxContainer/Buttons/RaceButton
 @onready var time_trial_button: Button = $CenterContainer/VBoxContainer/Buttons/TimeTrialButton
+@onready var practice_button: Button = $CenterContainer/VBoxContainer/Buttons/PracticeButton
 @onready var controls_button: Button = $CenterContainer/VBoxContainer/Buttons/ControlsButton
 @onready var quit_button: Button = $CenterContainer/VBoxContainer/Buttons/QuitButton
 @onready var best_time_label: Label = $CenterContainer/VBoxContainer/BestTimeLabel
@@ -48,6 +49,7 @@ const MENU_CONTROLS := [
 func _ready() -> void:
 	race_button.pressed.connect(_on_race)
 	time_trial_button.pressed.connect(_on_time_trial)
+	practice_button.pressed.connect(_on_practice)
 	controls_button.pressed.connect(_open_controls)
 	back_button.pressed.connect(_close_controls)
 	quit_button.pressed.connect(_on_quit)
@@ -98,6 +100,7 @@ func _refresh_controller_state() -> void:
 	hint_label.visible = not has_pad
 	race_button.disabled = not has_pad
 	time_trial_button.disabled = not has_pad
+	practice_button.disabled = not has_pad
 	# The Controls page stays reachable even without a controller so players can
 	# read the layout. While it's open, leave its focus alone.
 	if controls_panel.visible:
@@ -145,7 +148,7 @@ func _close_controls() -> void:
 
 func _set_menu_focusable(on: bool) -> void:
 	var mode := Control.FOCUS_ALL if on else Control.FOCUS_NONE
-	for b in [race_button, time_trial_button, controls_button, quit_button]:
+	for b in [race_button, time_trial_button, practice_button, controls_button, quit_button]:
 		b.focus_mode = mode
 
 
@@ -162,6 +165,10 @@ func _on_race() -> void:
 
 func _on_time_trial() -> void:
 	RaceManager.change_scene_preloaded(RaceManager.TIME_TRIAL_SCENE)
+
+
+func _on_practice() -> void:
+	RaceManager.change_scene_preloaded(RaceManager.PRACTICE_SCENE)
 
 
 func _on_quit() -> void:
