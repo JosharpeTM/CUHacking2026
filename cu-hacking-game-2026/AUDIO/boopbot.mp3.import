@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/boopbot.mp3-98302e1554a7df57315eada248bbb392.
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
