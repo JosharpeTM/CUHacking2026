@@ -175,6 +175,9 @@ var _character_rest: Transform3D = Transform3D()  # its authored transform, capt
 func _ready() -> void:
 	_p = "p%d_" % player_id
 	add_to_group("Player")
+	# Seed the respawn point (Triangle/Y) with the start spawn until the first
+	# checkpoint is cleared. Runs before the race scene root calls start_race().
+	RaceManager.set_respawn(player_id, global_transform)
 	_move_dir = -global_transform.basis.z
 	# Remember where each node sits so the slope lean is applied relative to it.
 	for n in _tilt_nodes:
@@ -183,6 +186,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Triangle/Y: warp back to the last checkpoint (or spawn). Only while the
+	# race is live — during the countdown you're already parked at the line.
+	if RaceManager.race_active and Input.is_action_just_pressed(_p + "respawn"):
+		_respawn_to_checkpoint()
+		return
+
 	# During the "3 2 1 GO" countdown the skater is pinned at the start line:
 	# ignore all input, kill any drift, but still settle onto the ground.
 	if RaceManager.input_locked:
@@ -211,6 +220,22 @@ func _physics_process(delta: float) -> void:
 	_handle_wall_impacts(velocity_before_slide)
 	handle_collision(delta)
 	_update_trails()
+
+
+## Warp the skater back to their last cleared checkpoint (Triangle/Y), facing
+## the way they were driving through it. Kills all momentum and any in-progress
+## drift/boost so they get a clean, stationary restart — mirrors the fall-off-map
+## reset the race scenes already do.
+func _respawn_to_checkpoint() -> void:
+	global_transform = RaceManager.get_respawn(player_id)
+	velocity = Vector3.ZERO
+	current_speed = 0.0
+	current_turn_rate = 0.0
+	_drifting = false
+	_drift_charge = 0.0
+	_drift_boost_bonus = 0.0
+	_drift_boost_timer = 0.0
+	_move_dir = -global_transform.basis.z
 
 
 ## Powerslide: hold "drift" while steering to break grip and start a slide.

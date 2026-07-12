@@ -17,14 +17,17 @@ var _player: Node = null  # this HUD's skater, used to read the boost tank
 
 @onready var split_label: Label = $SplitLabel
 @onready var finished_label: Label = $FinishedLabel
+@onready var lap_label: Label = $LapLabel
 @onready var boost_gauge = $BoostGauge
 
 
 func _ready() -> void:
 	split_label.visible = false
 	finished_label.visible = false
+	_update_lap_label(1)
 	RaceManager.split_recorded.connect(_on_split_recorded)
 	RaceManager.player_finished.connect(_on_player_finished)
+	RaceManager.lap_completed.connect(_on_lap_completed)
 
 	# Find the skater this HUD belongs to so we can mirror its boost tank.
 	# Groups are tracked tree-wide, so this resolves even across SubViewports.
@@ -53,9 +56,19 @@ func _update_boost() -> void:
 func _on_split_recorded(pid: int, checkpoint_index: int, split_time: float) -> void:
 	if pid != player_id:
 		return
-	split_label.text = "CP %d/%d  %s" % [checkpoint_index + 1, RaceManager.TOTAL_CHECKPOINTS, RaceManager.format_time(split_time)]
+	split_label.text = "CP %d/%d  %s" % [checkpoint_index + 1, RaceManager.total_checkpoints, RaceManager.format_time(split_time)]
 	split_label.visible = true
 	_split_time_left = SPLIT_SHOW_TIME
+
+
+func _on_lap_completed(pid: int, new_lap: int, _total_laps: int) -> void:
+	if pid != player_id:
+		return
+	_update_lap_label(new_lap)
+
+
+func _update_lap_label(lap: int) -> void:
+	lap_label.text = "LAP %d/%d" % [lap, RaceManager.TOTAL_LAPS]
 
 
 func _on_player_finished(pid: int, final_time: float) -> void:

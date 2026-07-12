@@ -9,11 +9,23 @@ extends Node
 
 signal split_recorded(player_id: int, checkpoint_index: int, split_time: float)
 signal player_finished(player_id: int, final_time: float)
+# Emitted when a player crosses the finish line but still has laps to go.
+# `new_lap` is the lap they are now starting (2..TOTAL_LAPS). The HUD listens
+# to update its LAP counter.
+signal lap_completed(player_id: int, new_lap: int, total_laps: int)
 # Emitted each second of the pre-race countdown. value counts 3 -> 2 -> 1,
 # then 0 to signal "GO!". The HUD listens to animate the 3-2-1-GO overlay.
 signal countdown_tick(value: int)
 
-const TOTAL_CHECKPOINTS := 3
+# How many laps a race lasts. You only win by crossing the finish line on the
+# final lap — earlier crossings just start the next lap.
+const TOTAL_LAPS := 3
+
+# Fallback checkpoint count, used only if a scene somehow has no checkpoints
+# (e.g. running the results screen directly). The real value is recomputed from
+# the track's checkpoints at the start of every race — see start_race().
+const DEFAULT_CHECKPOINTS := 3
+var total_checkpoints := DEFAULT_CHECKPOINTS
 # How many seconds the "3 2 1 GO" countdown runs before the racers are freed.
 const COUNTDOWN_SECONDS := 3
 const MENU_SCENE := "res://TSCN/UI/main_menu.tscn"
@@ -30,7 +42,13 @@ const SCORE_PATH := "user://scores.cfg"
 var race_active := false
 var input_locked := false  # true during the countdown: skaters can't move yet
 var race_elapsed := 0.0  # shared race clock, runs until every racer finishes
-var players := {}  # player_id -> {elapsed, splits: Array, next_cp, finished, final_time}
+var players := {}  # player_id -> {elapsed, splits: Array, next_cp, lap, finished, final_time}
+
+# Where each player respawns when they press Triangle/Y: their start spawn at
+# first, then the last checkpoint they cleared. Kept OUTSIDE `players` so it
+# survives start_race() resets — the skaters register their spawn from _ready(),
+# which runs before the race scene root calls start_race().
+var respawn_points := {}  # player_id -> Transform3D
 
 # Mode + time-trial result state, read by the results screen.
 var is_time_trial := false
@@ -182,6 +200,12 @@ func start_race(time_trial := false) -> void:
 	is_time_trial = time_trial
 	is_new_record = false
 	previous_best = 0.0
+	# Count the checkpoints the current track actually has, so tracks can carry
+	# any number of them without touching this script. Falls back to the default
+	# if none are present (e.g. results screen run directly).
+	var cp_count := get_tree().get_nodes_in_group("RaceCheckpoint").size()
+	total_checkpoints = cp_count if cp_count > 0 else DEFAULT_CHECKPOINTS
+
 	var ids: Array = [1] if time_trial else [1, 2]
 	players = {}
 	for pid in ids:
@@ -189,6 +213,7 @@ func start_race(time_trial := false) -> void:
 			"elapsed": 0.0,
 			"splits": [],
 			"next_cp": 0,
+			"lap": 1,  # laps 1..TOTAL_LAPS; you win by finishing the last one
 			"finished": false,
 			"final_time": 0.0,
 		}
@@ -239,15 +264,39 @@ func checkpoint_passed(player_id: int, checkpoint_index: int) -> bool:
 	return true
 
 
-## Called by the finish line. Only counts once per player, and only
-## after all checkpoints have been passed. When BOTH players are done,
-## switch to the results scene.
+## Record where a player should reappear when they press Triangle/Y. Skaters
+## call this from _ready() with their spawn, and checkpoints call it (with the
+## crossing skater's transform) each time a gate is cleared.
+func set_respawn(player_id: int, xform: Transform3D) -> void:
+	respawn_points[player_id] = xform
+
+
+## The player's current respawn transform (last checkpoint, or spawn). Falls
+## back to identity if nothing has been registered yet.
+func get_respawn(player_id: int) -> Transform3D:
+	return respawn_points.get(player_id, Transform3D.IDENTITY)
+
+
+## Called by the finish line. Only counts once per lap, and only after all of
+## this lap's checkpoints have been passed. Crossing on an earlier lap just
+## resets the checkpoints and starts the next lap; only crossing on the final
+## lap actually finishes the player. When BOTH players are done, switch to the
+## results scene.
 func player_finished_at_line(player_id: int) -> bool:
 	if not race_active or not players.has(player_id):
 		return false
 	var p: Dictionary = players[player_id]
-	if p.finished or p.next_cp < TOTAL_CHECKPOINTS:
+	if p.finished or p.next_cp < total_checkpoints:
 		return false
+
+	if p.lap < TOTAL_LAPS:
+		# Lap complete, but not the last one — go around again.
+		p.lap += 1
+		p.next_cp = 0
+		lap_completed.emit(player_id, p.lap, TOTAL_LAPS)
+		return true
+
+	# Final lap crossed — this player is done.
 	p.finished = true
 	p.final_time = p.elapsed
 	player_finished.emit(player_id, p.final_time)

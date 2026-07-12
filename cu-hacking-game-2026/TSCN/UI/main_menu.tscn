@@ -17,6 +17,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
+[sub_resource type="StyleBoxFlat" id="controls_bg"]
+bg_color = Color(0.03, 0.008, 0.08, 0.95)
+
 [node name="Main Menu" type="Control" unique_id=1314625455]
 layout_mode = 3
 anchors_preset = 15
@@ -97,6 +100,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "TIME TRIAL"
 
+[node name="ControlsButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons" unique_id=155003486]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "CONTROLS"
+
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/Buttons" unique_id=627943485]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -108,6 +116,83 @@ theme_override_colors/font_color = Color(1, 0.35, 0.75, 1)
 theme_override_font_sizes/font_size = 22
 text = "⚠ CONNECT A CONTROLLER TO PLAY"
 horizontal_alignment = 1
+
+[node name="ControlsPanel" type="Panel" parent="." unique_id=1314625500]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("controls_bg")
+
+[node name="Center" type="CenterContainer" parent="ControlsPanel" unique_id=1314625501]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="ControlsPanel/Center" unique_id=1314625502]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="CTitle" type="Label" parent="ControlsPanel/Center/VBox" unique_id=1314625503]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.75, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.15, 1, 0.7)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="ControlsPanel/Center/VBox" unique_id=1314625504]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.55, 0.95, 1)
+theme_override_font_sizes/font_size = 20
+text = "Each player uses their own controller."
+horizontal_alignment = 1
+
+[node name="DriveHeader" type="Label" parent="ControlsPanel/Center/VBox" unique_id=1314625505]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "DRIVING"
+horizontal_alignment = 1
+
+[node name="DriveGrid" type="GridContainer" parent="ControlsPanel/Center/VBox" unique_id=1314625506]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="MenuHeader" type="Label" parent="ControlsPanel/Center/VBox" unique_id=1314625507]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 26
+text = "MENU"
+horizontal_alignment = 1
+
+[node name="MenuGrid" type="GridContainer" parent="ControlsPanel/Center/VBox" unique_id=1314625508]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="Spacer2" type="Control" parent="ControlsPanel/Center/VBox" unique_id=1314625509]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="ControlsPanel/Center/VBox" unique_id=1314625510]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "BACK"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=578792107]
 transform = Transform3D(1, 0, 0, 0, 0.9903711, 0.13843793, 0, -0.13843793, 0.9903711, -2.0961947, 6.0911517, 0.13418955)
