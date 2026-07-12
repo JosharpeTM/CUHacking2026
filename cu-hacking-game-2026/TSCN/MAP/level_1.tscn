@@ -310,6 +310,7 @@ shadow_enabled = true
 
 [node name="Player1" parent="." unique_id=855619314 instance=ExtResource("3_a4ihj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.633482, 1.9826598, -10.758427)
+brake_speed = 20.0
 turn_speed = 1.4
 min_turn_speed = 0.9
 drift_turn_multiplier = 2.0
@@ -318,6 +319,7 @@ drift_boost_duration = 1.2
 [node name="Player2" parent="." unique_id=598120428 instance=ExtResource("3_a4ihj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -8.69632, 1.9826598, -10.758427)
 player_id = 2
+brake_speed = 20.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1362003363]
 stream = ExtResource("4_exygr")
@@ -386,49 +388,49 @@ transform = Transform3D(1.2639854, -0.19895527, -0.801529, 0.117688574, 2.990751
 [node name="Boosts" type="Node" parent="." unique_id=1247766947]
 
 [node name="BoostPad0" parent="Boosts" unique_id=1645289874 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.964762, 0.3, 4)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4.964762, 0.3, 4)
 
 [node name="BoostPad5" parent="Boosts" unique_id=211987958 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.104309, 0.3, -18.800152)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 13.104309, 0.3, -18.800152)
 
 [node name="BoostPad6" parent="Boosts" unique_id=1845271791 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.07275, 0.3, -11.324083)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 69.07275, 0.3, -11.324083)
 
 [node name="BoostPad7" parent="Boosts" unique_id=1995659209 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.94192, 0.3, 35.524925)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 78.94192, 0.3, 35.524925)
 
 [node name="BoostPad8" parent="Boosts" unique_id=425255111 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.70257, 0.3, 35.524925)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -90.70257, 0.3, 35.524925)
 
 [node name="BoostPad1" parent="Boosts" unique_id=114463631 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.958326, 0.3, 4)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.958326, 0.3, 4)
 
 [node name="BoostPad2" parent="Boosts" unique_id=1712297004 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.640749, 0.3, 55.01784)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.640749, 0.3, 55.01784)
 
 [node name="BoostPad3" parent="Boosts" unique_id=1971439288 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0028019, 0.3, 55.01784)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1.0028019, 0.3, 55.01784)
 
 [node name="BoostPad4" parent="Boosts" unique_id=1263089247 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.049946, 9.0818615, 106.87245)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7.049946, 9.0818615, 106.87245)
 
 [node name="BoostPad9" parent="Boosts" unique_id=93422524 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.657513, 9.0818615, 106.87245)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -39.657513, 9.0818615, 106.87245)
 
 [node name="BoostPad10" parent="Boosts" unique_id=2083810114 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.66808, 9.0818615, 106.87245)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 72.66808, 9.0818615, 106.87245)
 
 [node name="BoostPad11" parent="Boosts" unique_id=1301518034 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.45763, 20.328712, 182.6747)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30.45763, 20.328712, 182.6747)
 
 [node name="BoostPad12" parent="Boosts" unique_id=1230457151 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -89.19411, 20.328712, 182.6747)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -89.19411, 20.328712, 182.6747)
 
 [node name="BoostPad13" parent="Boosts" unique_id=1949626316 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -89.19411, 20.328712, 233.2903)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -89.19411, 20.328712, 233.2903)
 
 [node name="BoostPad14" parent="Boosts" unique_id=47076750 instance=ExtResource("7_exygr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.576035, 20.328712, 233.2903)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 47.576035, 20.328712, 233.2903)
 
 [node name="Decor" type="Node" parent="." unique_id=1023628413]
 
