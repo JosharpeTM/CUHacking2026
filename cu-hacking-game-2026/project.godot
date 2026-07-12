@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="CUHacking Game 2026"
-run/main_scene="res://TSCN/UI/main_menu.tscn"
+run/main_scene="res://TSCN/UI/splash.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
-boot_splash/image="uid://bh72d0xemh8m7"
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="uid://cimsvlle4p58r"
 
 [autoload]
@@ -213,3 +213,4 @@ pause={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
