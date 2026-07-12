@@ -39,6 +39,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	p2_view_camera.global_transform = p2_world_camera.global_transform
+	p2_view_camera.fov = p2_world_camera.fov  # mirror the speed-based FOV onto P2's view camera
 	# One shared race clock, drawn once in the middle of the screen.
 	timer_label.text = RaceManager.format_time(RaceManager.race_elapsed)
 

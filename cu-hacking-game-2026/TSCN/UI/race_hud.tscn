@@ -2,6 +2,25 @@
 
 [ext_resource type="Script" uid="uid://dsgb3pnrsl2hi" path="res://SCRIPTS/UI/race_hud.gd" id="1_hudscr"]
 [ext_resource type="Script" uid="uid://rturgi2pg0oo" path="res://SCRIPTS/UI/boost_gauge.gd" id="2_gauge"]
+[ext_resource type="Shader" uid="uid://dyixsixdyb6rc" path="res://SCRIPTS/SHADERS/speed_lines.gdshader" id="3_speedlines"]
+[ext_resource type="Shader" uid="uid://xfar7sdi20lc" path="res://SCRIPTS/SHADERS/motion_blur.gdshader" id="4_motionblur"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_motionblur"]
+resource_local_to_scene = true
+shader = ExtResource("4_motionblur")
+shader_parameter/strength = 0.0
+shader_parameter/max_blur = 0.045
+shader_parameter/center_clear = 0.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_speedlines"]
+resource_local_to_scene = true
+shader = ExtResource("3_speedlines")
+shader_parameter/intensity = 0.0
+shader_parameter/line_color = Color(0.72, 0.4, 1, 0.9)
+shader_parameter/line_count = 90.0
+shader_parameter/anim_speed = 8.0
+shader_parameter/center_radius = 0.6
+shader_parameter/falloff = 0.35
 
 [node name="RaceHUD" type="Control" unique_id=787289291]
 layout_mode = 3
@@ -13,15 +32,37 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_hudscr")
 
+[node name="MotionBlur" type="ColorRect" parent="." unique_id=787289293]
+material = SubResource("ShaderMaterial_motionblur")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="SpeedLines" type="ColorRect" parent="." unique_id=787289292]
+material = SubResource("ShaderMaterial_speedlines")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
 [node name="LapLabel" type="Label" parent="." unique_id=616837182]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -100.0
-offset_top = 16.0
+offset_top = 64.0
 offset_right = 100.0
-offset_bottom = 52.0
+offset_bottom = 100.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 1, 1)
 theme_override_colors/font_outline_color = Color(0.4, 0.1, 0.7, 0.7)
