@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="4_nshell"]
 [ext_resource type="AudioStream" uid="uid://bjgkb4blj6kpm" path="res://Sound effects/dragon-studio-car-crash-sound-376882 (1).mp3" id="6_stkrw"]
 [ext_resource type="PackedScene" uid="uid://dvui5wsbwbywu" path="res://TSCN/PLAYER/goyim_2.tscn" id="7_661gc"]
+[ext_resource type="AudioStream" uid="uid://43b4lfut3ufd" path="res://jump.wav" id="8_w62ip"]
 
 [sub_resource type="Gradient" id="Gradient_trail"]
 colors = PackedColorArray(0.95, 0.7, 1, 1, 0.55, 0.2, 1, 0)
@@ -115,3 +116,7 @@ shape = SubResource("BoxShape3D_ev255")
 
 [node name="dxracer_goyim" parent="." unique_id=863082526 instance=ExtResource("7_661gc")]
 transform = Transform3D(-7.86805e-08, 0, -1.8, 0, 1.8, 0, 1.8, 0, -7.86805e-08, 0.25406107, -2.15032, -0.46522138)
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="." unique_id=731247339]
+stream = ExtResource("8_w62ip")
+volume_db = -14.211

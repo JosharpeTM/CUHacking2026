@@ -449,6 +449,8 @@ func handle_jump(_delta: float) -> void:
 	if _grounded and Input.is_action_just_pressed(_p + "jump"):
 		velocity.y = jump_velocity
 		_jump_active = true  # keep the hover cushion off until we crest the jump
+		# Play jump sound
+		$AudioStreamPlayer4.play()
 		if _camera_rig:
 			_camera_rig.add_trauma(jump_trauma)
 
