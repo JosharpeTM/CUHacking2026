@@ -5,7 +5,6 @@
 [ext_resource type="Material" uid="uid://di2houa2ewsgy" path="res://MATERIALS/PurpleTransparnet.tres" id="3_32382"]
 [ext_resource type="AudioStream" uid="uid://c3lsje3yfrymk" path="res://Sound effects/New Project_partial.mp3" id="4_nfgo0"]
 [ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="4_nshell"]
-[ext_resource type="AudioStream" uid="uid://bvf6p8aatpvj1" path="res://Sound effects/11325622-whoosh-sound-effect-240257.mp3" id="6_i07s0"]
 [ext_resource type="AudioStream" uid="uid://bjgkb4blj6kpm" path="res://Sound effects/dragon-studio-car-crash-sound-376882 (1).mp3" id="6_stkrw"]
 [ext_resource type="PackedScene" uid="uid://dvui5wsbwbywu" path="res://TSCN/PLAYER/goyim_2.tscn" id="7_661gc"]
 [ext_resource type="AudioStream" uid="uid://5loc3n0q3l1x" path="res://Sound effects/freesound_community-huff-2-79979.mp3" id="9_wotdl"]
@@ -107,7 +106,6 @@ pitch_scale = 0.91
 parameters/looping = false
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1396643119]
-stream = ExtResource("6_i07s0")
 volume_db = -6.46
 pitch_scale = 1.57
 
