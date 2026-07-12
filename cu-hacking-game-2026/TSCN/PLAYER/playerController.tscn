@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://d1jy6hbmb2kjd" path="res://SCRIPTS/PLAYER/playerController.gd" id="1_k5di7"]
 [ext_resource type="Script" uid="uid://cgfy2h0tewj61" path="res://TSCN/PLAYER/cameraControl.gd" id="2_ul7ul"]
 [ext_resource type="Material" uid="uid://di2houa2ewsgy" path="res://MATERIALS/PurpleTransparnet.tres" id="3_32382"]
-[ext_resource type="AudioStream" uid="uid://c3lsje3yfrymk" path="res://Sound effects/New Project_partial.mp3" id="4_nfgo0"]
 [ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="4_nshell"]
+[ext_resource type="AudioStream" uid="uid://yry0gvudopfv" path="res://Sound effects/soundreality-wind-blowing-457954.mp3" id="5_wotdl"]
+[ext_resource type="AudioStream" uid="uid://bvf6p8aatpvj1" path="res://Sound effects/11325622-whoosh-sound-effect-240257.mp3" id="6_i07s0"]
 [ext_resource type="AudioStream" uid="uid://bjgkb4blj6kpm" path="res://Sound effects/dragon-studio-car-crash-sound-376882 (1).mp3" id="6_stkrw"]
 [ext_resource type="PackedScene" uid="uid://dvui5wsbwbywu" path="res://TSCN/PLAYER/goyim_2.tscn" id="7_661gc"]
 [ext_resource type="AudioStream" uid="uid://43b4lfut3ufd" path="res://jump.wav" id="8_w62ip"]
@@ -100,12 +101,15 @@ process_material = SubResource("ParticleProcessMaterial_g4v7s")
 draw_pass_1 = SubResource("TorusMesh_nfgo0")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=124619127]
-stream = ExtResource("4_nfgo0")
-volume_db = -10.535
+stream = ExtResource("5_wotdl")
+volume_db = 12.72
 pitch_scale = 0.73
 parameters/looping = false
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1396643119]
+stream = ExtResource("6_i07s0")
+volume_db = -6.46
+pitch_scale = 1.57
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="." unique_id=972450500]
 stream = ExtResource("6_stkrw")
