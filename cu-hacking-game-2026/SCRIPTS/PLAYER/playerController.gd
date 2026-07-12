@@ -213,6 +213,7 @@ func _physics_process(delta: float) -> void:
 	handle_boost(delta)
 	handle_acceleration(delta)
 	handle_jump(delta)
+	handle_kickflip()
 	apply_movement(delta)
 	_update_slope_tilt(delta)  # align colliders to the ramp before resolving collisions
 	_update_character_motion(delta)  # bob/sway/drift-tilt on the skater mesh, over the slope lean
@@ -479,6 +480,15 @@ func handle_jump(_delta: float) -> void:
 		$AudioStreamPlayer4.play()
 		if _camera_rig:
 			_camera_rig.add_trauma(jump_trauma)
+
+
+## X button (or the X key for P1): trigger a one-shot kickflip on the skater
+## mesh. Purely cosmetic — it doesn't touch movement, so you can pull it off
+## mid-drive. The mesh handles playing the clip and easing back into the drive
+## loop; this just forwards the press.
+func handle_kickflip() -> void:
+	if Input.is_action_just_pressed(_p + "kickflip"):
+		_character_mesh.kickflip()
 
 
 func apply_movement(delta: float) -> void:

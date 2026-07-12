@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://j10pk7mpv5vo"]
+
+[ext_resource type="PackedScene" uid="uid://bwu75trdtovqc" path="res://MODELS/GOYIM GOYIM GOYIM.glb" id="1_0my7v"]
+[ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="2_ijqw1"]
+[ext_resource type="Script" uid="uid://bq8n5ie6onlg2" path="res://TSCN/PLAYER/dxracer_goyim.gd" id="2_wvcj5"]
+
+[node name="GOYIM GOYIM GOYIM" unique_id=2140618246 instance=ExtResource("1_0my7v")]
+script = ExtResource("2_wvcj5")
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(974146962) index="0" unique_id=1496293682]
+bones/1/position = Vector3(-0.054104697, 0.6984874, -0.017038587)
+bones/1/rotation = Quaternion(-0.01151484, -0.00034103778, -0.05990793, 0.9981375)
+bones/2/rotation = Quaternion(-0.01808323, -0.0005355753, -0.09408111, 0.9954002)
+bones/4/position = Vector3(-0.033523954, -0.03708579, -0.080168694)
+bones/4/rotation = Quaternion(0.91461515, 0.35288626, 0.02025887, -0.19631623)
+bones/5/rotation = Quaternion(-0.15273371, -0.0026600559, 0.41410232, 0.89732087)
+bones/6/rotation = Quaternion(-0.017190183, -0.00450547, -0.7079126, 0.7060765)
+bones/8/rotation = Quaternion(0.009057607, 0.2459218, 0.9040569, -0.34945905)
+bones/9/rotation = Quaternion(-0.236666, -0.024863511, -0.35017866, 0.90595037)
+bones/10/rotation = Quaternion(0.083047085, -0.015579325, 0.69825226, 0.7108476)
+bones/12/rotation = Quaternion(-0.9584319, 0.093809664, -0.24827407, 0.104728825)
+bones/13/rotation = Quaternion(0.33374768, 0.050418455, -0.09818923, 0.93617815)
+bones/14/rotation = Quaternion(0.0701122, 0.22609875, -0.05502027, 0.97001886)
+bones/15/rotation = Quaternion(0.05584446, 0.24037316, 0.95319784, -0.17468832)
+bones/16/rotation = Quaternion(-0.029033013, 0.08768771, -0.017347803, 0.99557376)
+bones/17/rotation = Quaternion(0.056224525, -0.5149465, 0.009664426, 0.85532194)
+bones/18/position = Vector3(0.46451584, 0.88344955, 0.056358848)
+bones/18/rotation = Quaternion(-0.49924842, 0.4994636, -0.47463045, 0.5253695)
+bones/19/position = Vector3(0.04147747, 0.8911936, 0.10836854)
+
+[node name="Cube_002" parent="Armature/Skeleton3D" index="0" unique_id=1921003993]
+material_override = ExtResource("2_ijqw1")

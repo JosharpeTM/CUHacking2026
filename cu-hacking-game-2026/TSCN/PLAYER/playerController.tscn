@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://c3lsje3yfrymk" path="res://Sound effects/New Project_partial.mp3" id="4_nfgo0"]
 [ext_resource type="Material" uid="uid://mv37fpdjga54" path="res://MATERIALS/NeonShell.tres" id="4_nshell"]
 [ext_resource type="AudioStream" uid="uid://bjgkb4blj6kpm" path="res://Sound effects/dragon-studio-car-crash-sound-376882 (1).mp3" id="6_stkrw"]
-[ext_resource type="PackedScene" uid="uid://dvui5wsbwbywu" path="res://TSCN/PLAYER/goyim_2.tscn" id="7_661gc"]
+[ext_resource type="PackedScene" uid="uid://j10pk7mpv5vo" path="res://TSCN/PLAYER/goyim_goyim_goyim.tscn" id="8_w62ip"]
 [ext_resource type="AudioStream" uid="uid://5loc3n0q3l1x" path="res://Sound effects/freesound_community-huff-2-79979.mp3" id="9_wotdl"]
 
 [sub_resource type="Gradient" id="Gradient_trail"]
@@ -116,10 +116,10 @@ stream = ExtResource("6_stkrw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09118652, 0.96092916, -0.39941406)
 shape = SubResource("BoxShape3D_ev255")
 
-[node name="dxracer_goyim" parent="." unique_id=863082526 instance=ExtResource("7_661gc")]
-transform = Transform3D(-7.86805e-08, 0, -1.8, 0, 1.8, 0, 1.8, 0, -7.86805e-08, 0.25406107, -2.15032, -0.46522138)
-
 [node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="." unique_id=731247339]
 stream = ExtResource("9_wotdl")
 volume_db = 24.0
 pitch_scale = 2.37
+
+[node name="dxracer_goyim" parent="." unique_id=2140618246 instance=ExtResource("8_w62ip")]
+transform = Transform3D(-7.86805e-08, 0, -1.8, 0, 1.8, 0, 1.8, 0, -7.86805e-08, 0.22770762, -2.8781972, -0.5267627)
