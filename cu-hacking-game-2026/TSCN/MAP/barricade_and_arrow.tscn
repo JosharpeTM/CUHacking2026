@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://wjf008da4c7y"]
+
+[ext_resource type="PackedScene" uid="uid://b7i4e4wp6pgb8" path="res://MODELS/BarricadeAndArrow.glb" id="1_ye4gc"]
+
+[node name="BarricadeAndArrow" unique_id=951361273 instance=ExtResource("1_ye4gc")]
